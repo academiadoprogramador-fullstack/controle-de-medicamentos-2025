@@ -9,8 +9,8 @@ public class TelaPrincipal
     private char opcaoPrincipal;
 
     private ContextoDados contexto;
-    private TelaPaciente telaPaciente;
     private TelaFornecedor telaFornecedor;
+    private TelaPaciente telaPaciente;
 
     public TelaPrincipal()
     {
