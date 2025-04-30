@@ -1,16 +1,19 @@
 ﻿using System.Text.Json.Serialization;
 using System.Text.Json;
+using ControleDeMedicamentos.ConsoleApp.ModuloFornecedor;
 
 namespace ControleDeMedicamentos.ConsoleApp.Compartilhado;
 
 public class ContextoDados
 {
     private string pastaArmazenamento = "C:\\temp";
-    private string arquivoArmazenamento = "dados.json";
+    private string arquivoArmazenamento = "dados-controle-medicamento.json";
 
-
+    public List<Fornecedor> Fornecedores { get; set; }
+    
     public ContextoDados()
     {
+        Fornecedores = new List<Fornecedor>();  
     }
 
     public ContextoDados(bool carregarDados) : this()
@@ -51,5 +54,7 @@ public class ContextoDados
         ContextoDados contextoArmazenado = JsonSerializer.Deserialize<ContextoDados>(json, jsonOptions)!;
 
         if (contextoArmazenado == null) return;
+
+        Fornecedores = contextoArmazenado.Fornecedores;
     }
 }

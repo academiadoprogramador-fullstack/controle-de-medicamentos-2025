@@ -1,4 +1,5 @@
 ﻿using ControleDeMedicamentos.ConsoleApp.Compartilhado;
+using ControleDeMedicamentos.ConsoleApp.ModuloFornecedor;
 
 namespace ControleDeMedicamentos.ConsoleApp.Util;
 
@@ -8,9 +9,15 @@ public class TelaPrincipal
 
     private ContextoDados contexto;
 
+    private TelaFornecedor telaFornecedor;
+
     public TelaPrincipal()
     {
         contexto = new ContextoDados(true);
+
+        IRepositorioFornecedor repositorioFornecedor = new RepositorioFornecedorEmArquivo(contexto);
+
+        telaFornecedor = new TelaFornecedor(repositorioFornecedor);
     }
 
     public void ApresentarMenuPrincipal()
@@ -23,6 +30,7 @@ public class TelaPrincipal
 
         Console.WriteLine();
 
+        Console.WriteLine("1 - Cadastro de Fornecedores");
         Console.WriteLine("S - Sair");
 
         Console.WriteLine();
@@ -33,6 +41,9 @@ public class TelaPrincipal
 
     public ITelaCrud ObterTela()
     {
+        if (opcaoPrincipal == '1')
+            return telaFornecedor;
+
         return null;
     }
 }
