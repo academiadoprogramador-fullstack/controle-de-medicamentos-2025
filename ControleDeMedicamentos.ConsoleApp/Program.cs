@@ -18,6 +18,9 @@ namespace ControleDeMedicamentos.ConsoleApp
 
                 char opcaoEscolhida = telaSelecionada.ApresentarMenu();
 
+                if (opcaoEscolhida == 'S')
+                    break;
+
                 switch (opcaoEscolhida)
                 {
                     case '1': telaSelecionada.CadastrarRegistro(); break;

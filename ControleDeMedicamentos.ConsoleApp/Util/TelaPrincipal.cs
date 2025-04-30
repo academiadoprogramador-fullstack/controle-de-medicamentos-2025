@@ -1,4 +1,5 @@
 ﻿using ControleDeMedicamentos.ConsoleApp.Compartilhado;
+using ControleDeMedicamentos.ConsoleApp.ModuloFornecedor;
 using ControleDeMedicamentos.ConsoleApp.ModuloPaciente;
 
 namespace ControleDeMedicamentos.ConsoleApp.Util;
@@ -9,13 +10,16 @@ public class TelaPrincipal
 
     private ContextoDados contexto;
     private TelaPaciente telaPaciente;
+    private TelaFornecedor telaFornecedor;
 
     public TelaPrincipal()
     {
         contexto = new ContextoDados(true);
 
-        IRepositorioPaciente repositorioPaciente = new RepositorioPacienteEmArquivo(contexto);
+        IRepositorioFornecedor repositorioFornecedor = new RepositorioFornecedorEmArquivo(contexto);
+        telaFornecedor = new TelaFornecedor(repositorioFornecedor);
 
+        IRepositorioPaciente repositorioPaciente = new RepositorioPacienteEmArquivo(contexto);
         telaPaciente = new TelaPaciente(repositorioPaciente);
     }
 
@@ -29,7 +33,8 @@ public class TelaPrincipal
 
         Console.WriteLine();
 
-        Console.WriteLine("1 - Controle de Pacientes");
+        Console.WriteLine("1 - Cadastro de Fornecedores");
+        Console.WriteLine("2 - Controle de Pacientes");
         Console.WriteLine("S - Sair");
 
         Console.WriteLine();
@@ -41,6 +46,9 @@ public class TelaPrincipal
     public ITelaCrud ObterTela()
     {
         if (opcaoPrincipal == '1')
+            return telaFornecedor;
+
+        if (opcaoPrincipal == '2')
             return telaPaciente;
 
         return null;
