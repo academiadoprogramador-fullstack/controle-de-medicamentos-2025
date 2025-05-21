@@ -1,8 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@using ControleDeMedicamentos.ConsoleApp.Model
+
+@model EditarFuncionarioViewModel;
+
+<!DOCTYPE html>
 <html>
-<head>
+  <head>
     <meta charset="utf-8" />
-    <title>Página Inicial - Controle de Medicamentos</title>
+    <title>Edição de Funcionário - Gestão de Equipamentos</title>
 
     <style>
         :root {
@@ -18,7 +22,6 @@
             margin: 0;
             background-color: var(--fundo-principal);
             color: var(--cor-neutra);
-
             font-family: 'Segoe UI', sans-serif;
         }
 
@@ -30,12 +33,9 @@
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-
             justify-content: space-between;
-
             padding: 0 200px;
             background-color: var(--fundo-secundario);
-
             border-bottom: 1px solid var(--cor-borda);
         }
 
@@ -47,19 +47,85 @@
             display: flex;
             flex-wrap: wrap;
             gap: 30px;
-
             justify-content: center;
-
             padding-left: 0;
-
             list-style: none;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            background-color: var(--fundo-secundario);
+            border: 1px solid var(--cor-borda);
+            border-radius: 12px;
+            padding: 30px;
+            width: 700px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+            font-size: 18px;
+            color: var(--texto-neutro);
+        }
+
+        input[type="text"] {
+            width: 100%;
+            height: 40px;
+            margin-bottom: 20px;
+            padding-left: 10px;
+
+            font-size: 18px;
+
+            border: 1px solid var(--cor-borda);
+            border-radius: 6px;
+
+            background-color: var(--fundo-primario);
+            color: var(--texto-neutro);
+        }
+
+        #botaoCadastrar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            width: 200px;
+            height: 35px;
+
+            border: 1px solid var(--cor-principal);
+            border-radius: 9px;
+
+            background-color: var(--cor-principal);
+            color: var(--cor-neutra);
+            
+            cursor: pointer;
+
+            font-size: 16px;
+        }
+
+        #botaoVoltar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            width: 200px;
+            height: 35px;
+
+            border: 1px solid var(--cor-secundaria);
+            border-radius: 9px;
+
+            background-color: var(--cor-secundaria);
+            color: var(--cor-neutra);
+
+            cursor: pointer;
+
+            font-size: 16px;
         }
 
         .link-navegacao {
             color: var(--cor-principal);
-
             text-decoration: none;
-
             font-weight: 500;
             font-size: 18px;
         }
@@ -76,8 +142,7 @@
         }
 
         main {
-            padding: 0 200px;
-
+            padding: 0 600px;
             display: flex;
             flex-wrap: wrap;
             gap: 30px;
@@ -86,13 +151,10 @@
         .card {
             border: 1px solid var(--cor-borda);
             border-radius: 15px;
-
             padding: 0 10px;
-
             width: 350px;
             height: 150px;
             background-color: var(--fundo-secundario);
-
             transition: transform 0.2s ease, background-color 0.2s ease;
         }
 
@@ -109,10 +171,19 @@
             color: var(--cor-neutra);
         }
 
+        .botoes-interacao {
+            display: flex;
+            gap: 10px;
+
+            justify-content: end;
+            align-items: center;
+
+            margin-top: 100px;
+        }
+
         @@media (max-width: 768px) {
             nav {
                 padding: 20px;
-
                 justify-content: center;
             }
 
@@ -123,10 +194,10 @@
             main {
                 padding: 20px;
             }
-        }
+		}
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <nav>
         <h2>Controle de Medicamentos</h2>
 
@@ -139,33 +210,25 @@
     </nav>
 
     <header>
-        <h2>Página Inicial</h2>
+      <h2>Edição de Funcionário</h2>
     </header>
 
     <main>
-        <a href="/funcionarios/visualizar">
-            <div class="card">
-                <h3>Funcionários</h3>
+        <form action="/funcionarios/editar/@Model.Id" method="post">
+            <label for="nome">Nome do Funcionário:</label>
+            <input type="text" name="nome" value="@Model.Nome"/>
 
-                <p>Gerencie os funcionários credenciados. Funcionários são responsáveis pela gerência do estoque.</p>
+            <label for="telefone">Telefone do Funcionário:</label>
+            <input type="text" name="telefone" value="@Model.Telefone" />
+
+            <label for="cpf">CPF do Funcionário:</label>
+            <input type="text" name="cpf" value="@Model.Cpf" />
+
+            <div class="botoes-interacao">
+                <a type="button" id="botaoVoltar" href="/funcionarios/visualizar">Voltar</a>
+                <button type="submit" id="botaoCadastrar">Confirmar</button>
             </div>
-        </a>
-
-        <a href="/fornecedores/visualizar">
-            <div class="card">
-                <h3>Fornecedores</h3>
-
-                <p>Gerencie os fornecedores de medicamentos. Fornecedores são necessários para a gestão de estoque de medicamentos.</p>
-            </div>
-        </a>
-
-        <a href="/pacientes/visualizar">
-            <div class="card">
-                <h3>Pacientes</h3>
-
-                <p>Gerencie os pacientes. O cadastro de pacientes é necessário para retirada de prescrições.</p>
-            </div>
-        </a>
+        </form>
     </main>
-</body>
+  </body>
 </html>

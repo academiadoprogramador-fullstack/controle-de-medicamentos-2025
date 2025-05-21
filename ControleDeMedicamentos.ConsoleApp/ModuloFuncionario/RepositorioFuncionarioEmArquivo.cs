@@ -2,7 +2,7 @@
 
 namespace ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
 
-public class RepositorioFuncionarioEmArquivo : RepositorioBaseEmArquivo<Funcionario>
+public class RepositorioFuncionarioEmArquivo : RepositorioBaseEmArquivo<Funcionario>, IRepositorioFuncionario
 {
     public RepositorioFuncionarioEmArquivo(ContextoDados contexto) : base(contexto)
     {
