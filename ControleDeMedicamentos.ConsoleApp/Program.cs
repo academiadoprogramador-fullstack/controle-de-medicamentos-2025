@@ -1,39 +1,19 @@
-﻿using ControleDeMedicamentos.ConsoleApp.Compartilhado;
-using ControleDeMedicamentos.ConsoleApp.Util;
-
-namespace ControleDeMedicamentos.ConsoleApp
+﻿namespace ControleDeMedicamentos.ConsoleApp
 {
-    internal class Program
+    class Program
     {
         static void Main(string[] args)
         {
-            // boilerplate
-            TelaPrincipal telaPrincipal = new TelaPrincipal();
+            WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-            while (true)
-            {
-                telaPrincipal.ApresentarMenuPrincipal();
+            builder.Services.AddControllersWithViews();
 
-                ITelaCrud telaSelecionada = telaPrincipal.ObterTela();
+            WebApplication app = builder.Build();
 
-                char opcaoEscolhida = telaSelecionada.ApresentarMenu();
+            app.UseRouting();
+            app.MapControllers();
 
-                if (opcaoEscolhida == 'S')
-                    break;
-
-                switch (opcaoEscolhida)
-                {
-                    case '1': telaSelecionada.CadastrarRegistro(); break;
-
-                    case '2': telaSelecionada.EditarRegistro(); break;
-
-                    case '3': telaSelecionada.ExcluirRegistro(); break;
-
-                    case '4': telaSelecionada.VisualizarRegistros(true); break;
-
-                    default: break;
-                }
-            }
+            app.Run();
         }
     }
 }
