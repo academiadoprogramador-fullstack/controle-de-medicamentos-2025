@@ -1,12 +1,12 @@
 ﻿@using ControleDeMedicamentos.ConsoleApp.Model
 
-@model ExcluirFornecedorViewModel;
+@model ExcluirPacienteViewModel;
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Excluir Fornecedor - Gestão de Equipamentos</title>
+    <title>Excluir Paciente - Gestão de Equipamentos</title>
     <style>
         :root {
             --fundo-principal: #1e1e1e;
@@ -143,18 +143,18 @@
             transition: transform 0.2s ease, background-color 0.2s ease;
         }
 
-        .card:hover {
-            transform: scale(1.02);
-            background-color: #3d3d42;
-        }
+            .card:hover {
+                transform: scale(1.02);
+                background-color: #3d3d42;
+            }
 
-        .card h3 {
-            color: var(--cor-principal);
-        }
+            .card h3 {
+                color: var(--cor-principal);
+            }
 
-        .card p {
-            color: var(--cor-neutra);
-        }
+            .card p {
+                color: var(--cor-neutra);
+            }
 
         .botoes-interacao {
             display: flex;
@@ -191,13 +191,13 @@
         </ul>
     </nav>
     <header>
-        <h2>Excluir Fornecedor</h2>
+        <h2>Excluir Paciente</h2>
     </header>
     <main>
-        <form action="/fornecedores/excluir/@Model.Id" method="post">
-            <p>Tem certeza que deseja excluir o fornecedor <strong>@Model.Nome</strong>?</p>
+        <form action="/pacientes/excluir/@Model.Id" method="post">
+            <p>Tem certeza que deseja excluir o paciente <strong>@Model.Nome</strong>?</p>
             <div class="botoes-interacao">
-                <a type="button" id="botaoVoltar" href="/fornecedores/visualizar">Voltar</a>
+                <a type="button" id="botaoVoltar" href="/pacientes/visualizar">Voltar</a>
                 <button type="submit" id="botaoConfirmar">Excluir</button>
             </div>
         </form>

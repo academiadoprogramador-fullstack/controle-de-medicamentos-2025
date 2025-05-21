@@ -1,12 +1,12 @@
 ﻿@using ControleDeMedicamentos.ConsoleApp.Model
 
-@model ExcluirFornecedorViewModel;
+@model VisualizarPacientesViewModel;
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Excluir Fornecedor - Gestão de Equipamentos</title>
+    <title>Visualização de Pacientes - Gestão de Equipamentos</title>
     <style>
         :root {
             --fundo-principal: #1e1e1e;
@@ -38,75 +38,25 @@
             border-bottom: 1px solid var(--cor-borda);
         }
 
-            nav > h2 {
-                margin: 0;
-            }
+        nav > h2 {
+            margin: 0;
+        }
 
-            nav > ul {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 30px;
-                justify-content: center;
-                padding-left: 0;
-                list-style: none;
-            }
-
-        form {
+        nav > ul {
             display: flex;
-            flex-direction: column;
-            background-color: var(--fundo-secundario);
-            border: 1px solid var(--cor-borda);
-            border-radius: 12px;
-            padding: 30px;
-            width: 700px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 6px;
-            font-weight: bold;
-            font-size: 18px;
-            color: var(--texto-neutro);
-        }
-
-        input[type="text"] {
-            width: 100%;
-            height: 40px;
-            margin-bottom: 20px;
-            padding-left: 10px;
-            font-size: 18px;
-            border: 1px solid var(--cor-borda);
-            border-radius: 6px;
-            background-color: var(--fundo-primario);
-            color: var(--texto-neutro);
-        }
-
-        #botaoConfirmar {
-            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
             justify-content: center;
-            align-items: center;
-            width: 200px;
-            height: 35px;
+            padding-left: 0;
+            list-style: none;
+        }
+
+        #botaoCadastrar {
+            padding: 5px 15px;
             border: 1px solid var(--cor-principal);
             border-radius: 9px;
             background-color: var(--cor-principal);
-            color: var(--cor-neutra);
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        #botaoVoltar {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 200px;
-            height: 35px;
-            border: 1px solid var(--cor-secundaria);
-            border-radius: 9px;
-            background-color: var(--cor-secundaria);
-            color: var(--cor-neutra);
-            cursor: pointer;
-            font-size: 16px;
+            color: var(--cor-neutra)
         }
 
         .link-navegacao {
@@ -127,7 +77,7 @@
         }
 
         main {
-            padding: 0 600px;
+            padding: 0 200px;
             display: flex;
             flex-wrap: wrap;
             gap: 30px;
@@ -138,7 +88,7 @@
             border-radius: 15px;
             padding: 0 10px;
             width: 350px;
-            height: 150px;
+            height: 200px;
             background-color: var(--fundo-secundario);
             transition: transform 0.2s ease, background-color 0.2s ease;
         }
@@ -154,6 +104,7 @@
 
         .card p {
             color: var(--cor-neutra);
+            margin: 4px 0;
         }
 
         .botoes-interacao {
@@ -161,7 +112,21 @@
             gap: 10px;
             justify-content: end;
             align-items: center;
-            margin-top: 100px;
+            margin-top: 40px;
+        }
+
+        .botoes-interacao > a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 90px;
+            height: 30px;
+            border: 1px solid var(--cor-principal);
+            border-radius: 9px;
+            background-color: var(--cor-principal);
+            color: var(--cor-neutra);
+            cursor: pointer;
+            font-size: 16px;
         }
 
         @@media (max-width: 768px) {
@@ -191,16 +156,22 @@
         </ul>
     </nav>
     <header>
-        <h2>Excluir Fornecedor</h2>
+        <h2>Visualização de Pacientes</h2>
+        <a href="/pacientes/cadastrar" type="button" id="botaoCadastrar">Cadastrar Novo Paciente</a>
     </header>
     <main>
-        <form action="/fornecedores/excluir/@Model.Id" method="post">
-            <p>Tem certeza que deseja excluir o fornecedor <strong>@Model.Nome</strong>?</p>
-            <div class="botoes-interacao">
-                <a type="button" id="botaoVoltar" href="/fornecedores/visualizar">Voltar</a>
-                <button type="submit" id="botaoConfirmar">Excluir</button>
+        @foreach (var p in Model.Registros)
+        {
+            <div class="card">
+                <h3>@p.Nome</h3>
+                <p><strong>Telefone:</strong> @p.Telefone</p>
+                <p><strong>Cartão SUS:</strong> @p.CartaoSus</p>
+                <div class="botoes-interacao">
+                    <a type="button" href="/pacientes/editar/@p.Id">Editar</a>
+                    <a type="button" href="/pacientes/excluir/@p.Id">Excluir</a>
+                </div>
             </div>
-        </form>
+        }
     </main>
 </body>
 </html>
