@@ -2,118 +2,40 @@
 
 @model VisualizarPacientesViewModel;
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>Visualização de Pacientes - Gestão de Equipamentos</title>
-    <style>
-        :root {
-            --fundo-principal: #1e1e1e;
-            --fundo-secundario: #2c2c2e;
-            --cor-principal: #DB56EB;
-            --cor-secundaria: #b084d1;
-            --cor-borda: #3a3a3c;
-            --cor-neutra: #ffffff;
-        }
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Visualização de Pacientes";
+}
 
-        body {
-            margin: 0;
-            background-color: var(--fundo-principal);
-            color: var(--cor-neutra);
-            font-family: 'Segoe UI', sans-serif;
-        }
+<style>
+    #botaoCadastrar {
+        padding: 10px 20px;
+        width: 200px;
+        border: 1px solid var(--cor-principal);
+        border-radius: 9px;
+        background-color: var(--cor-principal);
+        color: var(--cor-neutra);
 
-        a {
-            text-decoration: none;
-        }
+        text-align: center;
+    }
 
-        nav {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 200px;
-            background-color: var(--fundo-secundario);
-            border-bottom: 1px solid var(--cor-borda);
-        }
+    .secao-cards {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
 
-        nav > h2 {
-            margin: 0;
-        }
+    .card {
+        height: 200px;
+    }
 
-        nav > ul {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            justify-content: center;
-            padding-left: 0;
-            list-style: none;
-        }
-
-        #botaoCadastrar {
-            padding: 5px 15px;
-            border: 1px solid var(--cor-principal);
-            border-radius: 9px;
-            background-color: var(--cor-principal);
-            color: var(--cor-neutra)
-        }
-
-        .link-navegacao {
-            color: var(--cor-principal);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 18px;
-        }
-
-            .link-navegacao:hover {
-                color: var(--cor-secundaria);
-            }
-
-        header {
-            padding: 20px 200px;
-            margin-bottom: 20px;
-            border-bottom: 1px solid var(--cor-borda);
-        }
-
-        main {
-            padding: 0 200px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-        }
-
-        .card {
-            border: 1px solid var(--cor-borda);
-            border-radius: 15px;
-            padding: 0 10px;
-            width: 350px;
-            height: 200px;
-            background-color: var(--fundo-secundario);
-            transition: transform 0.2s ease, background-color 0.2s ease;
-        }
-
-        .card:hover {
-            transform: scale(1.02);
-            background-color: #3d3d42;
-        }
-
-        .card h3 {
-            color: var(--cor-principal);
-        }
-
-        .card p {
-            color: var(--cor-neutra);
-            margin: 4px 0;
-        }
-
-        .botoes-interacao {
-            display: flex;
-            gap: 10px;
-            justify-content: end;
-            align-items: center;
-            margin-top: 40px;
-        }
+    .botoes-interacao {
+        display: flex;
+        gap: 10px;
+        justify-content: end;
+        align-items: center;
+        margin-top: 30px;
+    }
 
         .botoes-interacao > a {
             display: flex;
@@ -128,50 +50,21 @@
             cursor: pointer;
             font-size: 16px;
         }
+</style>
 
-        @@media (max-width: 768px) {
-            nav {
-                padding: 20px;
-                justify-content: center;
-            }
+<a href="/pacientes/cadastrar" type="button" id="botaoCadastrar">Cadastrar Novo Paciente</a>
 
-            header {
-                padding: 20px;
-            }
-
-            main {
-                padding: 20px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <nav>
-        <h2>Controle de Medicamentos</h2>
-        <ul>
-            <li><a class="link-navegacao" href="/">Página Inicial</a></li>
-            <li><a class="link-navegacao" href="/funcionarios/visualizar">Funcionários</a></li>
-            <li><a class="link-navegacao" href="/fornecedores/visualizar">Fornecedores</a></li>
-            <li><a class="link-navegacao" href="/pacientes/visualizar">Pacientes</a></li>
-        </ul>
-    </nav>
-    <header>
-        <h2>Visualização de Pacientes</h2>
-        <a href="/pacientes/cadastrar" type="button" id="botaoCadastrar">Cadastrar Novo Paciente</a>
-    </header>
-    <main>
-        @foreach (var p in Model.Registros)
-        {
-            <div class="card">
-                <h3>@p.Nome</h3>
-                <p><strong>Telefone:</strong> @p.Telefone</p>
-                <p><strong>Cartão SUS:</strong> @p.CartaoSus</p>
-                <div class="botoes-interacao">
-                    <a type="button" href="/pacientes/editar/@p.Id">Editar</a>
-                    <a type="button" href="/pacientes/excluir/@p.Id">Excluir</a>
-                </div>
+<div class="secao-cards">
+    @foreach (var p in Model.Registros)
+    {
+        <div class="card">
+            <h3>@p.Nome</h3>
+            <p><strong>Telefone:</strong> @p.Telefone</p>
+            <p><strong>Cartão SUS:</strong> @p.CartaoSus</p>
+            <div class="botoes-interacao">
+                <a type="button" href="/pacientes/editar/@p.Id">Editar</a>
+                <a type="button" href="/pacientes/excluir/@p.Id">Excluir</a>
             </div>
-        }
-    </main>
-</body>
-</html>
+        </div>
+    }
+</div>
