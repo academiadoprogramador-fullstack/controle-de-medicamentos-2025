@@ -1,0 +1,39 @@
+﻿using ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
+using System.Diagnostics.CodeAnalysis;
+
+namespace ControleDeMedicamentos.ConsoleApp.Model;
+
+public class CadastrarRequisicaoEntradaViewModel
+{
+    public int MedicamentoId { get; set; }
+    public int FuncionarioId { get; set; }
+    public int QuantidadeRequisitada { get; set; }
+    public List<SelecionarFuncionarioViewModel> FuncionariosDisponiveis { get; set; }
+
+    public CadastrarRequisicaoEntradaViewModel() { }
+
+    public CadastrarRequisicaoEntradaViewModel(int medicamentoId, List<Funcionario> funcionarios)
+    {
+        MedicamentoId = medicamentoId;
+        FuncionariosDisponiveis = new List<SelecionarFuncionarioViewModel>();
+
+        foreach (var f in funcionarios)
+        {
+            var selecionarVM = new SelecionarFuncionarioViewModel(f.Id, f.Nome);
+
+            FuncionariosDisponiveis.Add(selecionarVM);
+        }
+    }
+}
+
+public class SelecionarFuncionarioViewModel
+{
+    public int Id { get; set; }
+    public string Nome { get; set; }
+
+    public SelecionarFuncionarioViewModel(int id, string nome)
+    {
+        Id = id;
+        Nome = nome;
+    }
+}
