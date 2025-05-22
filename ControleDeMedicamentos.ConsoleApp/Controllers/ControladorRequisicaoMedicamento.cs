@@ -3,6 +3,7 @@ using ControleDeMedicamentos.ConsoleApp.Extensions;
 using ControleDeMedicamentos.ConsoleApp.Model;
 using ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
 using ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
+using ControleDeMedicamentos.ConsoleApp.ModuloPaciente;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ControleDeMedicamentos.ConsoleApp.Controllers;
@@ -14,6 +15,7 @@ public class ControladorRequisicaoMedicamento : Controller
     private IRepositorioRequisicaoMedicamento repositorioRequisicaoMedicamento;
     private IRepositorioFuncionario repositorioFuncionario;
     private IRepositorioMedicamento repositorioMedicamento;
+    private IRepositorioPaciente repositorioPaciente;
 
     public ControladorRequisicaoMedicamento()
     {
@@ -21,6 +23,7 @@ public class ControladorRequisicaoMedicamento : Controller
         repositorioRequisicaoMedicamento = new RepositorioRequisicaoMedicamentoEmArquivo(contextoDados);
         repositorioFuncionario = new RepositorioFuncionarioEmArquivo(contextoDados);
         repositorioMedicamento = new RepositorioMedicamentoEmArquivo(contextoDados);
+        repositorioPaciente = new RepositorioPacienteEmArquivo(contextoDados);
     }
 
     [HttpGet("entrada/{medicamentoId:int}")]
@@ -53,7 +56,42 @@ public class ControladorRequisicaoMedicamento : Controller
 
         NotificacaoViewModel notificacaoVM = new NotificacaoViewModel(
             "Requisição de Entrada Cadastrada!",
-            $"O registro foi cadastrado com sucesso!"
+            $"O estoque do medicamento foi atualizado!"
+        );
+
+        return View("Notificacao", notificacaoVM);
+    }
+
+    [HttpGet("saida/{medicamentoId:int}")]
+    public IActionResult CadastrarSaida(int medicamentoId)
+    {
+        var pacientes = repositorioPaciente.SelecionarRegistros();
+        var medicamentoSelecionado = repositorioMedicamento.SelecionarRegistroPorId(medicamentoId);
+
+        var cadastrarVM = new CadastrarRequisicaoSaidaViewModel(medicamentoId, pacientes);
+
+        ViewBag.NomeMedicamento = medicamentoSelecionado.Nome;
+
+        return View(cadastrarVM);
+    }
+
+    [HttpPost("saida/{medicamentoId:int}")]
+    public IActionResult CadastrarSaida(int medicamentoId, CadastrarRequisicaoSaidaViewModel cadastrarVM)
+    {
+        var pacientes = repositorioPaciente.SelecionarRegistros();
+        var medicamentos = repositorioMedicamento.SelecionarRegistros();
+
+        var registro = cadastrarVM.ParaEntidade(pacientes, medicamentos);
+
+        var medicamentoSelecionado = repositorioMedicamento.SelecionarRegistroPorId(medicamentoId);
+
+        medicamentoSelecionado.RemoverDoEstoque(registro);
+
+        repositorioRequisicaoMedicamento.CadastrarRequisicaoSaida(registro);
+
+        NotificacaoViewModel notificacaoVM = new NotificacaoViewModel(
+            "Requisição de Saída Cadastrada!",
+            $"O estoque do medicamento foi atualizado!"
         );
 
         return View("Notificacao", notificacaoVM);

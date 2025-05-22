@@ -1,7 +1,6 @@
 ﻿using ControleDeMedicamentos.ConsoleApp.Model;
 using ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
 using ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
-using ControleDeMedicamentos.ConsoleApp.ModuloPaciente;
 
 namespace ControleDeMedicamentos.ConsoleApp.Extensions;
 
@@ -31,14 +30,4 @@ public static class RequisicaoEntradaExtensions
 
         return new RequisicaoEntrada(funcionarioSelecionado, medicamentoSelecionado, formularioVM.QuantidadeRequisitada);
     }
-
-    //public static DetalhesPacienteViewModel ParaDetalhesVM(this Paciente paciente)
-    //{
-    //    return new DetalhesPacienteViewModel(
-    //        paciente.Id,
-    //        paciente.Nome,
-    //        paciente.Telefone,
-    //        paciente.CartaoSus
-    //    );
-    //}
 }

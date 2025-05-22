@@ -1,4 +1,5 @@
 ﻿using ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
+using ControleDeMedicamentos.ConsoleApp.ModuloPaciente;
 using System.Diagnostics.CodeAnalysis;
 
 namespace ControleDeMedicamentos.ConsoleApp.Model;
@@ -32,6 +33,41 @@ public class SelecionarFuncionarioViewModel
     public string Nome { get; set; }
 
     public SelecionarFuncionarioViewModel(int id, string nome)
+    {
+        Id = id;
+        Nome = nome;
+    }
+}
+
+public class CadastrarRequisicaoSaidaViewModel
+{
+    public int MedicamentoId { get; set; }
+    public int PacienteId { get; set; }
+    public int QuantidadeRequisitada { get; set; }
+    public List<SelecionarPacienteViewModel> PacientesDisponiveis { get; set; }
+
+    public CadastrarRequisicaoSaidaViewModel() { }
+
+    public CadastrarRequisicaoSaidaViewModel(int medicamentoId, List<Paciente> pacientes)
+    {
+        MedicamentoId = medicamentoId;
+        PacientesDisponiveis = new List<SelecionarPacienteViewModel>();
+
+        foreach (var p in pacientes)
+        {
+            var selecionarVM = new SelecionarPacienteViewModel(p.Id, p.Nome);
+
+            PacientesDisponiveis.Add(selecionarVM);
+        }
+    }
+}
+
+public class SelecionarPacienteViewModel
+{
+    public int Id { get; set; }
+    public string Nome { get; set; }
+
+    public SelecionarPacienteViewModel(int id, string nome)
     {
         Id = id;
         Nome = nome;
