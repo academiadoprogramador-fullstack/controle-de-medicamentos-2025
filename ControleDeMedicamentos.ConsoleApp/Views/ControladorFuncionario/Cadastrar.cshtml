@@ -2,233 +2,25 @@
 
 @model CadastrarFuncionarioViewModel;
 
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Cadastro de Funcionário - Gestão de Equipamentos</title>
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Cadastro de Funcionário";
+}
 
-    <style>
-        :root {
-            --fundo-principal: #1e1e1e;
-            --fundo-secundario: #2c2c2e;
-            --cor-principal: #DB56EB;
-            --cor-secundaria: #b084d1;
-            --cor-borda: #3a3a3c;
-            --cor-neutra: #ffffff;
-        }
+<link rel="stylesheet" href="~/form.css"/>
 
-        body {
-            margin: 0;
-            background-color: var(--fundo-principal);
-            color: var(--cor-neutra);
-            font-family: 'Segoe UI', sans-serif;
-        }
+<form action="/funcionarios/cadastrar" method="post">
+    <label for="nome">Nome do Funcionário:</label>
+    <input type="text" name="nome"/>
 
-        a {
-            text-decoration: none;
-        }
+    <label for="telefone">Telefone do Funcionário:</label>
+    <input type="text" name="telefone"/>
 
-        nav {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 200px;
-            background-color: var(--fundo-secundario);
-            border-bottom: 1px solid var(--cor-borda);
-        }
+    <label for="cpf">CPF do Funcionário:</label>
+    <input type="text" name="cpf"/>
 
-        nav > h2 {
-            margin: 0;
-        }
-
-        nav > ul {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            justify-content: center;
-            padding-left: 0;
-            list-style: none;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            background-color: var(--fundo-secundario);
-            border: 1px solid var(--cor-borda);
-            border-radius: 12px;
-            padding: 30px;
-            width: 700px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 6px;
-            font-weight: bold;
-            font-size: 18px;
-            color: var(--texto-neutro);
-        }
-
-        input[type="text"] {
-            width: 100%;
-            height: 40px;
-            margin-bottom: 20px;
-            padding-left: 10px;
-
-            font-size: 18px;
-
-            border: 1px solid var(--cor-borda);
-            border-radius: 6px;
-
-            background-color: var(--fundo-primario);
-            color: var(--texto-neutro);
-        }
-
-        #botaoCadastrar {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            width: 200px;
-            height: 35px;
-
-            border: 1px solid var(--cor-principal);
-            border-radius: 9px;
-
-            background-color: var(--cor-principal);
-            color: var(--cor-neutra);
-            
-            cursor: pointer;
-
-            font-size: 16px;
-        }
-
-        #botaoVoltar {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            width: 200px;
-            height: 35px;
-
-            border: 1px solid var(--cor-secundaria);
-            border-radius: 9px;
-
-            background-color: var(--cor-secundaria);
-            color: var(--cor-neutra);
-
-            cursor: pointer;
-
-            font-size: 16px;
-        }
-
-        .link-navegacao {
-            color: var(--cor-principal);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 18px;
-        }
-
-        .link-navegacao:hover {
-            color: var(--cor-secundaria);
-        }
-
-        header {
-            padding: 20px 200px;
-            margin-bottom: 20px;
-
-            border-bottom: 1px solid var(--cor-borda);
-        }
-
-        main {
-            padding: 0 600px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-        }
-
-        .card {
-            border: 1px solid var(--cor-borda);
-            border-radius: 15px;
-            padding: 0 10px;
-            width: 350px;
-            height: 150px;
-            background-color: var(--fundo-secundario);
-            transition: transform 0.2s ease, background-color 0.2s ease;
-        }
-
-        .card:hover {
-            transform: scale(1.02);
-            background-color: #3d3d42;
-        }
-
-        .card h3 {
-            color: var(--cor-principal);
-        }
-
-        .card p {
-            color: var(--cor-neutra);
-        }
-
-        .botoes-interacao {
-            display: flex;
-            gap: 10px;
-
-            justify-content: end;
-            align-items: center;
-
-            margin-top: 100px;
-        }
-
-        @@media (max-width: 768px) {
-            nav {
-                padding: 20px;
-                justify-content: center;
-            }
-
-            header {
-                padding: 20px;
-            }
-
-            main {
-                padding: 20px;
-            }
-		}
-    </style>
-  </head>
-  <body>
-    <nav>
-        <h2>Controle de Medicamentos</h2>
-
-        <ul>
-            <li><a class="link-navegacao" href="/">Página Inicial</a></li>
-            <li><a class="link-navegacao" href="/funcionarios/visualizar">Funcionários</a></li>
-            <li><a class="link-navegacao" href="/fornecedores/visualizar">Fornecedores</a></li>
-            <li><a class="link-navegacao" href="/pacientes/visualizar">Pacientes</a></li>
-        </ul>
-    </nav>
-
-    <header>
-      <h2>Cadastro de Funcionário</h2>
-    </header>
-
-    <main>
-        <form action="/funcionarios/cadastrar" method="post">
-            <label for="nome">Nome do Funcionário:</label>
-            <input type="text" name="nome"/>
-
-            <label for="telefone">Telefone do Funcionário:</label>
-            <input type="text" name="telefone"/>
-
-            <label for="cpf">CPF do Funcionário:</label>
-            <input type="text" name="cpf"/>
-
-            <div class="botoes-interacao">
-                <a type="button" id="botaoVoltar" href="/funcionarios/visualizar">Voltar</a>
-                <button type="submit" id="botaoCadastrar">Confirmar</button>
-            </div>
-        </form>
-    </main>
-  </body>
-</html>
+    <div class="botoes-interacao">
+        <a type="button" id="botaoVoltar" href="/funcionarios/visualizar">Voltar</a>
+        <button type="submit" id="botaoConfirmar">Confirmar</button>
+    </div>
+</form>
