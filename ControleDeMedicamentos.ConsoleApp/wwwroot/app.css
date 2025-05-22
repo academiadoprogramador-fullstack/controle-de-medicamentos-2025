@@ -61,6 +61,7 @@ header {
 main {
     padding: 0 200px;
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     gap: 30px;
 }
@@ -86,6 +87,7 @@ main {
 
 .card p {
     color: var(--cor-neutra);
+    margin: 0;
 }
 
 .botoes-interacao {

@@ -9,11 +9,20 @@
 
 <style>
     #botaoCadastrar {
-        padding: 5px 15px;
+        padding: 10px 20px;
+        width: 200px;
+        
         border: 1px solid var(--cor-principal);
         border-radius: 9px;
+
         background-color: var(--cor-principal);
-        color: var(--cor-neutra)
+        color: var(--cor-neutra);
+    }
+
+    .secao-cards {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
     }
 
     .card {
@@ -43,17 +52,21 @@
     }
 </style>
 
-@foreach (var f in Model.Registros)
-{
-    <div class="card">
-        <h3>@f.Nome</h3>
+<a href="/fornecedores/cadastrar" type="button" id="botaoCadastrar">Cadastrar Novo Fornecedor</a>
 
-        <p><strong>Telefone:</strong> @f.Telefone</p>
-        <p><strong>CNPJ:</strong> @f.CNPJ</p>
+<div class="secao-cards">
+    @foreach (var f in Model.Registros)
+    {
+        <div class="card">
+            <h3>@f.Nome</h3>
 
-        <div class="botoes-interacao">
-            <a type="button" href="/fornecedores/editar/@f.Id">Editar</a>
-            <a type="button" href="/fornecedores/excluir/@f.Id">Excluir</a>
+            <p><strong>Telefone:</strong> @f.Telefone</p>
+            <p><strong>CNPJ:</strong> @f.CNPJ</p>
+
+            <div class="botoes-interacao">
+                <a type="button" href="/fornecedores/editar/@f.Id">Editar</a>
+                <a type="button" href="/fornecedores/excluir/@f.Id">Excluir</a>
+            </div>
         </div>
-    </div>
-}
+    }
+</div>
