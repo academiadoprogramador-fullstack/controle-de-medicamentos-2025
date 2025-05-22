@@ -3,6 +3,7 @@ using System.Text.Json;
 using ControleDeMedicamentos.ConsoleApp.ModuloFornecedor;
 using ControleDeMedicamentos.ConsoleApp.ModuloPaciente;
 using ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
+using ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
 
 namespace ControleDeMedicamentos.ConsoleApp.Compartilhado;
 
@@ -14,12 +15,14 @@ public class ContextoDados
     public List<Fornecedor> Fornecedores { get; set; }
     public List<Paciente> Pacientes { get; set; }
     public List<Funcionario> Funcionarios { get; set; }
+    public List<Medicamento> Medicamentos { get; set; }
 
     public ContextoDados()
     {
         Fornecedores = new List<Fornecedor>();  
         Pacientes = new List<Paciente>();
         Funcionarios = new List<Funcionario>();
+        Medicamentos = new List<Medicamento>();
     }
 
     public ContextoDados(bool carregarDados) : this()
@@ -64,5 +67,6 @@ public class ContextoDados
         Fornecedores = contextoArmazenado.Fornecedores;
         Pacientes = contextoArmazenado.Pacientes;
         Funcionarios = contextoArmazenado.Funcionarios;
+        Medicamentos = contextoArmazenado.Medicamentos;
     }
 }

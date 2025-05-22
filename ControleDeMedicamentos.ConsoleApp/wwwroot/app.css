@@ -66,6 +66,12 @@ main {
     gap: 30px;
 }
 
+.secao-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
 .card {
     border: 1px solid var(--cor-borda);
     border-radius: 15px;
