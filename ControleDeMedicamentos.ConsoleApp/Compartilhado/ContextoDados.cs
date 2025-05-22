@@ -16,6 +16,8 @@ public class ContextoDados
     public List<Paciente> Pacientes { get; set; }
     public List<Funcionario> Funcionarios { get; set; }
     public List<Medicamento> Medicamentos { get; set; }
+    public List<RequisicaoEntrada> RequisicoesEntrada { get; set; }
+    public List<RequisicaoSaida> RequisicoesSaida { get; set; }
 
     public ContextoDados()
     {
@@ -23,6 +25,8 @@ public class ContextoDados
         Pacientes = new List<Paciente>();
         Funcionarios = new List<Funcionario>();
         Medicamentos = new List<Medicamento>();
+        RequisicoesEntrada = new List<RequisicaoEntrada>();
+        RequisicoesSaida = new List<RequisicaoSaida>();
     }
 
     public ContextoDados(bool carregarDados) : this()
@@ -60,13 +64,19 @@ public class ContextoDados
         JsonSerializerOptions jsonOptions = new JsonSerializerOptions();
         jsonOptions.ReferenceHandler = ReferenceHandler.Preserve;
 
-        ContextoDados contextoArmazenado = JsonSerializer.Deserialize<ContextoDados>(json, jsonOptions)!;
+        ContextoDados contextoArmazenado = JsonSerializer.Deserialize<ContextoDados>(
+            json, 
+            jsonOptions
+        )!;
 
         if (contextoArmazenado == null) return;
 
         Fornecedores = contextoArmazenado.Fornecedores;
         Pacientes = contextoArmazenado.Pacientes;
         Funcionarios = contextoArmazenado.Funcionarios;
+
         Medicamentos = contextoArmazenado.Medicamentos;
+        RequisicoesEntrada = contextoArmazenado.RequisicoesEntrada;
+        RequisicoesSaida = contextoArmazenado.RequisicoesSaida;
     }
 }

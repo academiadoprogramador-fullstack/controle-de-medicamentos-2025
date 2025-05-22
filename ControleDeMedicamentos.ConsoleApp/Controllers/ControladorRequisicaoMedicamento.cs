@@ -1,12 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ControleDeMedicamentos.ConsoleApp.Compartilhado;
+using ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ControleDeMedicamentos.ConsoleApp.Controllers;
 
 [Route("requisicoes-medicamentos")]
 public class ControladorRequisicaoMedicamento : Controller
 {
-    public IActionResult Index()
+    private ContextoDados contextoDados;
+    private IRepositorioRequisicaoMedicamento repositorioRequisicaoMedicamento;
+
+    public ControladorRequisicaoMedicamento()
     {
-        return View();
+        contextoDados = new ContextoDados(true);
+        repositorioRequisicaoMedicamento = new RepositorioRequisicaoMedicamentoEmArquivo(contextoDados);
     }
 }

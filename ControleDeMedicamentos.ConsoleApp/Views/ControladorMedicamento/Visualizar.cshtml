@@ -9,65 +9,65 @@
 
 <style>
     #botaoCadastrar {
-        padding: 10px 20px;
-        width: 220px;
-        border: 1px solid var(--cor-principal);
-        border-radius: 9px;
-        background-color: var(--cor-principal);
-        color: var(--cor-neutra);
-        text-align: center;
+    padding: 10px 20px;
+    width: 220px;
+    border: 1px solid var(--cor-principal);
+    border-radius: 9px;
+    background-color: var(--cor-principal);
+    color: var(--cor-neutra);
+    text-align: center;
     }
 
     .card {
-        height: 220px;
+    height: 220px;
     }
 
     .cabecalho-card {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     }
 
     .botoes-interacao {
-        display: flex;
-        gap: 5px;
-        justify-content: end;
-        align-items: center;
-        margin-top: 30px;
+    display: flex;
+    gap: 5px;
+    justify-content: end;
+    align-items: center;
+    margin-top: 30px;
     }
 
     .botoes-interacao > a {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 90px;
-        height: 30px;
-        border: 1px solid var(--cor-principal);
-        border-radius: 9px;
-        background-color: var(--cor-principal);
-        color: var(--cor-neutra);
-        cursor: pointer;
-        font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90px;
+    height: 30px;
+    border: 1px solid var(--cor-principal);
+    border-radius: 9px;
+    background-color: var(--cor-principal);
+    color: var(--cor-neutra);
+    cursor: pointer;
+    font-size: 16px;
     }
 
     .botoes-interacao-estoque {
-        display: flex;
-        gap: 5px;
+    display: flex;
+    gap: 5px;
     }
 
     .botoes-interacao-estoque > a {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        
-        color: var(--cor-neutra);
-        
-        border: 1px solid var(--cor-secundaria);
-        border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-        padding: 3px 6px;
+    color: var(--cor-neutra);
 
-        font-size: 15px;
+    border: 1px solid var(--cor-secundaria);
+    border-radius: 6px;
+
+    padding: 3px 6px;
+
+    font-size: 15px;
     }
 </style>
 
@@ -82,7 +82,11 @@
 
                 <div class="botoes-interacao-estoque">
                     <a type="button" href="/requisicoes-medicamentos/entrada/@m.Id">+ Estoque</a>
-                    <a type="button" href="/requisicoes-medicamentos/saida/@m.Id">- Estoque</a>
+
+                    @if (m.QuantidadeEmEstoque != 0)
+                    {
+                        <a type="button" href="/requisicoes-medicamentos/saida/@m.Id">- Estoque</a>
+                    }
                 </div>
             </div>
 
@@ -92,7 +96,7 @@
 
             @if (m.EmFalta)
             {
-                <strong>Medicamento em falta!</strong>
+                <strong style="color: var(--cor-secundaria);">Medicamento em falta!</strong>
             }
 
 
