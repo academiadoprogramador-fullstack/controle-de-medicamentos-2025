@@ -3,6 +3,7 @@ using ControleDeMedicamentos.ConsoleApp.Extensions;
 using ControleDeMedicamentos.ConsoleApp.Model;
 using ControleDeMedicamentos.ConsoleApp.ModuloFornecedor;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace ControleDeMedicamentos.ConsoleApp.Controllers;
 
@@ -40,8 +41,8 @@ public class ControladorFornecedor : Controller
         return View("Notificacao", notificacaoVM);
     }
 
-    [HttpGet("editar/{id:int}")]
-    public IActionResult Editar([FromRoute] int id)
+    [HttpGet("editar/{id:guid}")]
+    public IActionResult Editar([FromRoute] Guid id)
     {
         var registroSelecionado = repositorioFornecedor.SelecionarRegistroPorId(id);
 
@@ -55,8 +56,8 @@ public class ControladorFornecedor : Controller
         return View(editarVM);
     }
 
-    [HttpPost("editar/{id:int}")]
-    public IActionResult Editar([FromRoute] int id, EditarFornecedorViewModel editarVM)
+    [HttpPost("editar/{id:guid}")]
+    public IActionResult Editar([FromRoute] Guid id, EditarFornecedorViewModel editarVM)
     {
         var registroEditado = editarVM.ParaEntidade();
 
@@ -70,8 +71,8 @@ public class ControladorFornecedor : Controller
         return View("Notificacao", notificacaoVM);
     }
 
-    [HttpGet("excluir/{id:int}")]
-    public IActionResult Excluir([FromRoute] int id)
+    [HttpGet("excluir/{id:guid}")]
+    public IActionResult Excluir([FromRoute] Guid id)
     {
         var registroSelecionado = repositorioFornecedor.SelecionarRegistroPorId(id);
 
@@ -83,8 +84,8 @@ public class ControladorFornecedor : Controller
         return View("Excluir", excluirVM);
     }
 
-    [HttpPost("excluir/{id:int}")]
-    public IActionResult ExcluirConfirmado([FromRoute] int id)
+    [HttpPost("excluir/{id:guid}")]
+    public IActionResult ExcluirConfirmado([FromRoute] Guid id)
     {
         repositorioFornecedor.ExcluirRegistro(id);
 

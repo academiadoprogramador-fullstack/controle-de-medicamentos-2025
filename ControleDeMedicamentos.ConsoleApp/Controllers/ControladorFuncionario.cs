@@ -41,8 +41,8 @@ public class ControladorFuncionario : Controller
         return View("Notificacao", notificacaoVM);
     }
 
-    [HttpGet("editar/{id:int}")]
-    public IActionResult Editar([FromRoute] int id)
+    [HttpGet("editar/{id:guid}")]
+    public IActionResult Editar([FromRoute] Guid id)
     {
         var registroSelecionado = repositorioFuncionario.SelecionarRegistroPorId(id);
 
@@ -56,8 +56,8 @@ public class ControladorFuncionario : Controller
         return View(editarVM);
     }
 
-    [HttpPost("editar/{id:int}")]
-    public IActionResult Editar([FromRoute] int id, EditarFuncionarioViewModel editarVM)
+    [HttpPost("editar/{id:guid}")]
+    public IActionResult Editar([FromRoute] Guid id, EditarFuncionarioViewModel editarVM)
     {
         var registroEditado = editarVM.ParaEntidade();
 
@@ -71,8 +71,8 @@ public class ControladorFuncionario : Controller
         return View("Notificacao", notificacaoVM);
     }
 
-    [HttpGet("excluir/{id:int}")]
-    public IActionResult Excluir([FromRoute] int id)
+    [HttpGet("excluir/{id:guid}")]
+    public IActionResult Excluir([FromRoute] Guid id)
     {
         var registroSelecionado = repositorioFuncionario.SelecionarRegistroPorId(id);
 
@@ -84,8 +84,8 @@ public class ControladorFuncionario : Controller
         return View("Excluir", excluirVM);
     }
 
-    [HttpPost("excluir/{id:int}")]
-    public IActionResult ExcluirConfirmado([FromRoute] int id)
+    [HttpPost("excluir/{id:guid}")]
+    public IActionResult ExcluirConfirmado([FromRoute] Guid id)
     {
         repositorioFuncionario.ExcluirRegistro(id);
 

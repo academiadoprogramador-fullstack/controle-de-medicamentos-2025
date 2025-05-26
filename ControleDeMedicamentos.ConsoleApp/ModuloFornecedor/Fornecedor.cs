@@ -11,6 +11,7 @@ public class Fornecedor : EntidadeBase<Fornecedor>
 
     public Fornecedor(string nome, string telefone, string cnpj)
     {
+        Id = Guid.NewGuid();
         Nome = nome;
         Telefone = telefone;
         CNPJ = cnpj;

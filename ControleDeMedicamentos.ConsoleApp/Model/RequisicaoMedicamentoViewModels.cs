@@ -1,19 +1,18 @@
 ﻿using ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
 using ControleDeMedicamentos.ConsoleApp.ModuloPaciente;
-using System.Diagnostics.CodeAnalysis;
 
 namespace ControleDeMedicamentos.ConsoleApp.Model;
 
 public class CadastrarRequisicaoEntradaViewModel
 {
-    public int MedicamentoId { get; set; }
-    public int FuncionarioId { get; set; }
+    public Guid MedicamentoId { get; set; }
+    public Guid FuncionarioId { get; set; }
     public int QuantidadeRequisitada { get; set; }
     public List<SelecionarFuncionarioViewModel> FuncionariosDisponiveis { get; set; }
 
     public CadastrarRequisicaoEntradaViewModel() { }
 
-    public CadastrarRequisicaoEntradaViewModel(int medicamentoId, List<Funcionario> funcionarios)
+    public CadastrarRequisicaoEntradaViewModel(Guid medicamentoId, List<Funcionario> funcionarios)
     {
         MedicamentoId = medicamentoId;
         FuncionariosDisponiveis = new List<SelecionarFuncionarioViewModel>();
@@ -29,10 +28,10 @@ public class CadastrarRequisicaoEntradaViewModel
 
 public class SelecionarFuncionarioViewModel
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     public string Nome { get; set; }
 
-    public SelecionarFuncionarioViewModel(int id, string nome)
+    public SelecionarFuncionarioViewModel(Guid id, string nome)
     {
         Id = id;
         Nome = nome;
@@ -41,14 +40,14 @@ public class SelecionarFuncionarioViewModel
 
 public class CadastrarRequisicaoSaidaViewModel
 {
-    public int MedicamentoId { get; set; }
-    public int PacienteId { get; set; }
+    public Guid MedicamentoId { get; set; }
+    public Guid PacienteId { get; set; }
     public int QuantidadeRequisitada { get; set; }
     public List<SelecionarPacienteViewModel> PacientesDisponiveis { get; set; }
 
     public CadastrarRequisicaoSaidaViewModel() { }
 
-    public CadastrarRequisicaoSaidaViewModel(int medicamentoId, List<Paciente> pacientes)
+    public CadastrarRequisicaoSaidaViewModel(Guid medicamentoId, List<Paciente> pacientes)
     {
         MedicamentoId = medicamentoId;
         PacientesDisponiveis = new List<SelecionarPacienteViewModel>();
@@ -64,10 +63,10 @@ public class CadastrarRequisicaoSaidaViewModel
 
 public class SelecionarPacienteViewModel
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     public string Nome { get; set; }
 
-    public SelecionarPacienteViewModel(int id, string nome)
+    public SelecionarPacienteViewModel(Guid id, string nome)
     {
         Id = id;
         Nome = nome;

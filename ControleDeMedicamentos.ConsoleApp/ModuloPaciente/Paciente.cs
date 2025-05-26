@@ -13,6 +13,7 @@ public class Paciente : EntidadeBase<Paciente>
 
     public Paciente(string nome, string telefone, string cartaoSus) : this()
     {
+        Id = Guid.NewGuid();
         Nome = nome;
         Telefone = telefone;
         CartaoSus = cartaoSus;

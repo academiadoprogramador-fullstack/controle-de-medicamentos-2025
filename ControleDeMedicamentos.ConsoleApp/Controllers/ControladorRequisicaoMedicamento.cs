@@ -26,8 +26,8 @@ public class ControladorRequisicaoMedicamento : Controller
         repositorioPaciente = new RepositorioPacienteEmArquivo(contextoDados);
     }
 
-    [HttpGet("entrada/{medicamentoId:int}")]
-    public IActionResult CadastrarEntrada(int medicamentoId)
+    [HttpGet("entrada/{medicamentoId:guid}")]
+    public IActionResult CadastrarEntrada(Guid medicamentoId)
     {
         var funcionarios = repositorioFuncionario.SelecionarRegistros();
 
@@ -40,8 +40,8 @@ public class ControladorRequisicaoMedicamento : Controller
         return View("CadastrarEntrada", cadastrarVM);
     }
 
-    [HttpPost("entrada/{medicamentoId:int}")]
-    public IActionResult CadastrarEntrada(int medicamentoId, CadastrarRequisicaoEntradaViewModel cadastrarVM)
+    [HttpPost("entrada/{medicamentoId:guid}")]
+    public IActionResult CadastrarEntrada(Guid medicamentoId, CadastrarRequisicaoEntradaViewModel cadastrarVM)
     {
         var funcionarios = repositorioFuncionario.SelecionarRegistros();
         var medicamentos = repositorioMedicamento.SelecionarRegistros();
@@ -62,8 +62,8 @@ public class ControladorRequisicaoMedicamento : Controller
         return View("Notificacao", notificacaoVM);
     }
 
-    [HttpGet("saida/{medicamentoId:int}")]
-    public IActionResult CadastrarSaida(int medicamentoId)
+    [HttpGet("saida/{medicamentoId:guid}")]
+    public IActionResult CadastrarSaida(Guid medicamentoId)
     {
         var pacientes = repositorioPaciente.SelecionarRegistros();
         var medicamentoSelecionado = repositorioMedicamento.SelecionarRegistroPorId(medicamentoId);
@@ -75,8 +75,8 @@ public class ControladorRequisicaoMedicamento : Controller
         return View(cadastrarVM);
     }
 
-    [HttpPost("saida/{medicamentoId:int}")]
-    public IActionResult CadastrarSaida(int medicamentoId, CadastrarRequisicaoSaidaViewModel cadastrarVM)
+    [HttpPost("saida/{medicamentoId:guid}")]
+    public IActionResult CadastrarSaida(Guid medicamentoId, CadastrarRequisicaoSaidaViewModel cadastrarVM)
     {
         var pacientes = repositorioPaciente.SelecionarRegistros();
         var medicamentos = repositorioMedicamento.SelecionarRegistros();

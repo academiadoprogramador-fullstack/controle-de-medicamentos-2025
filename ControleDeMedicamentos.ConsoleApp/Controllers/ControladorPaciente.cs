@@ -40,8 +40,8 @@ public class ControladorPaciente : Controller
         return View("Notificacao", notificacaoVM);
     }
 
-    [HttpGet("editar/{id:int}")]
-    public IActionResult Editar([FromRoute] int id)
+    [HttpGet("editar/{id:guid}")]
+    public IActionResult Editar([FromRoute] Guid id)
     {
         var registroSelecionado = repositorioPaciente.SelecionarRegistroPorId(id);
 
@@ -55,8 +55,8 @@ public class ControladorPaciente : Controller
         return View(editarVM);
     }
 
-    [HttpPost("editar/{id:int}")]
-    public IActionResult Editar([FromRoute] int id, EditarPacienteViewModel editarVM)
+    [HttpPost("editar/{id:guid}")]
+    public IActionResult Editar([FromRoute] Guid id, EditarPacienteViewModel editarVM)
     {
         var registroEditado = editarVM.ParaEntidade();
 
@@ -70,8 +70,8 @@ public class ControladorPaciente : Controller
         return View("Notificacao", notificacaoVM);
     }
 
-    [HttpGet("excluir/{id:int}")]
-    public IActionResult Excluir([FromRoute] int id)
+    [HttpGet("excluir/{id:guid}")]
+    public IActionResult Excluir([FromRoute] Guid id)
     {
         var registroSelecionado = repositorioPaciente.SelecionarRegistroPorId(id);
 
@@ -83,8 +83,8 @@ public class ControladorPaciente : Controller
         return View("Excluir", excluirVM);
     }
 
-    [HttpPost("excluir/{id:int}")]
-    public IActionResult ExcluirConfirmado([FromRoute] int id)
+    [HttpPost("excluir/{id:guid}")]
+    public IActionResult ExcluirConfirmado([FromRoute] Guid id)
     {
         repositorioPaciente.ExcluirRegistro(id);
 

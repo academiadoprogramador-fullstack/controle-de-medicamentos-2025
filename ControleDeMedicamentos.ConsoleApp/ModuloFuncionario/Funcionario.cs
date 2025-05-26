@@ -15,6 +15,7 @@ public class Funcionario : EntidadeBase<Funcionario>
 
     public Funcionario(string nome, string telefone, string cpf) : this()
     {
+        Id = Guid.NewGuid();
         Nome = nome;
         Telefone = telefone;
         Cpf = cpf;

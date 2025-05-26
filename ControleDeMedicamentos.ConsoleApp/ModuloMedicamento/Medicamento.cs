@@ -46,6 +46,7 @@ public class Medicamento : EntidadeBase<Medicamento>
         Fornecedor fornecedor
     ) : this()
     {
+        Id = Guid.NewGuid();
         Nome = nome;
         Descricao = descricao;
         Fornecedor = fornecedor;

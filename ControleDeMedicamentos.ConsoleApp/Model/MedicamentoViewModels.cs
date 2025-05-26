@@ -8,7 +8,7 @@ public abstract class FormularioMedicamentoViewModel
 {
     public string Nome { get; set; }
     public string Descricao { get; set; }
-    public int FornecedorId { get; set; }
+    public Guid FornecedorId { get; set; }
     public List<SelecionarFornecedorViewModel> FornecedoresDisponiveis { get; set; }
 
     protected FormularioMedicamentoViewModel()
@@ -19,10 +19,10 @@ public abstract class FormularioMedicamentoViewModel
 
 public class SelecionarFornecedorViewModel
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     public string Nome { get; set; }
 
-    public SelecionarFornecedorViewModel(int id, string nome)
+    public SelecionarFornecedorViewModel(Guid id, string nome)
     {
         Id = id;
         Nome = nome;
@@ -46,15 +46,15 @@ public class CadastrarMedicamentoViewModel : FormularioMedicamentoViewModel
 
 public class EditarMedicamentoViewModel : FormularioMedicamentoViewModel
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
     public EditarMedicamentoViewModel() { }
 
     public EditarMedicamentoViewModel(
-        int id,
+        Guid id,
         string nome,
         string descricao,
-        int fornecedorId,
+        Guid fornecedorId,
         List<Fornecedor> fornecedores
     )
     {
@@ -74,12 +74,12 @@ public class EditarMedicamentoViewModel : FormularioMedicamentoViewModel
 
 public class ExcluirMedicamentoViewModel
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     public string Nome { get; set; }
 
     public ExcluirMedicamentoViewModel() { }
 
-    public ExcluirMedicamentoViewModel(int id, string nome)
+    public ExcluirMedicamentoViewModel(Guid id, string nome)
     {
         Id = id;
         Nome = nome;
@@ -105,14 +105,14 @@ public class VisualizarMedicamentosViewModel
 
 public class DetalhesMedicamentoViewModel
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     public string Nome { get; set; }
     public string Descricao { get; set; }
     public string NomeFornecedor { get; set; }
     public int QuantidadeEmEstoque { get; set; }
     public bool EmFalta { get; set; }
 
-    public DetalhesMedicamentoViewModel(int id, string nome, string descricao, string nomeFornecedor, int quantidade, bool emFalta)
+    public DetalhesMedicamentoViewModel(Guid id, string nome, string descricao, string nomeFornecedor, int quantidade, bool emFalta)
     {
         Id = id;
         Nome = nome;
