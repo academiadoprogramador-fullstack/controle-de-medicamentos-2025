@@ -35,7 +35,7 @@ public class ControladorPrescricao : Controller
 
         var prescricaoArmazenada = TempData.Peek("Prescricao");
 
-        if (prescricaoArmazenada != null && prescricaoArmazenada is string jsonString)
+        if (prescricaoArmazenada is null && prescricaoArmazenada is string jsonString)
         {
             cadastrarVM = JsonSerializer.Deserialize<CadastrarPrescricaoViewModel>(jsonString)!;
 
@@ -55,7 +55,6 @@ public class ControladorPrescricao : Controller
     {
         var pacientes = repositorioPaciente.SelecionarRegistros();
         var medicamentos = repositorioMedicamento.SelecionarRegistros();
-
 
         if (TempData.TryGetValue("Prescricao", out var valor) && valor is string jsonString)
         {
@@ -89,6 +88,14 @@ public class ControladorPrescricao : Controller
 
             return RedirectToAction("Cadastrar");
         }
+
+        else if (acaoSubmit == "limpar")
+        {
+            TempData.Remove("Prescricao");
+
+            return RedirectToAction("Cadastrar");
+        }
+
         else
         {
             var novoRegistro = cadastrarVM.ParaEntidade(pacientes, medicamentos);
