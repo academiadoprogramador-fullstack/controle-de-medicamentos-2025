@@ -1,4 +1,4 @@
-﻿namespace ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
+﻿namespace ControleDeMedicamentos.ConsoleApp.ModuloRequisicaoMedicamento;
 
 public interface IRepositorioRequisicaoMedicamento
 {

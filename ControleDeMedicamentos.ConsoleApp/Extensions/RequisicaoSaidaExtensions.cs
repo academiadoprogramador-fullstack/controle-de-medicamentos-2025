@@ -1,6 +1,7 @@
 ﻿using ControleDeMedicamentos.ConsoleApp.Model;
 using ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
 using ControleDeMedicamentos.ConsoleApp.ModuloPaciente;
+using ControleDeMedicamentos.ConsoleApp.ModuloRequisicaoMedicamento;
 
 namespace ControleDeMedicamentos.ConsoleApp.Extensions;
 

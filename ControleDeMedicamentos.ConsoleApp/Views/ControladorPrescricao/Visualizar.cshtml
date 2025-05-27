@@ -1,43 +1,30 @@
 ﻿@using ControleDeMedicamentos.ConsoleApp.Model
 
-@model VisualizarPacientesViewModel;
+@model VisualizarPrescricoesViewModel;
 
 @{
     Layout = "_Layout";
-    ViewBag.Titulo = "Visualização de Pacientes";
+    ViewBag.Titulo = "Visualização de Prescrições";
 }
 
 <style>
     #botaoCadastrar {
         padding: 10px 20px;
-        width: 200px;
+        width: 220px;
         border: 1px solid var(--cor-principal);
         border-radius: 9px;
         background-color: var(--cor-principal);
         color: var(--cor-neutra);
-
         text-align: center;
     }
 
-    .secao-cards {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-
     .card {
-        height: 200px;
-    }
-
-    .cabecalho-card {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        height: 220px;
     }
 
     .botoes-interacao {
         display: flex;
-        gap: 10px;
+        gap: 5px;
         justify-content: end;
         align-items: center;
         margin-top: 30px;
@@ -58,23 +45,18 @@
     }
 </style>
 
-<a href="/pacientes/cadastrar" type="button" id="botaoCadastrar">Cadastrar Novo Paciente</a>
+<a href="/prescricoes-medicas/cadastrar" type="button" id="botaoCadastrar">Cadastrar Nova Prescrição</a>
 
 <div class="secao-cards">
-    @foreach (var p in Model.Registros)
+    @foreach (var m in Model.Registros)
     {
         <div class="card">
             <div class="cabecalho-card">
-                <h3>@p.Nome</h3>
+                <h3>@m.DataEmissao</h3>
+            </div>
 
-                <a type="button" href="/prescricoes-medicas/cadastrar/@p.Id">Prescrever Medicamento</a>
-            </div>
-            <p><strong>Telefone:</strong> @p.Telefone</p>
-            <p><strong>Cartão SUS:</strong> @p.CartaoSus</p>
-            <div class="botoes-interacao">
-                <a type="button" href="/pacientes/editar/@p.Id">Editar</a>
-                <a type="button" href="/pacientes/excluir/@p.Id">Excluir</a>
-            </div>
+            <p><strong>CRM do Médico:</strong> @m.CrmMedico</p>
+            <p><strong>Paciente:</strong> @m.Paciente</p>
         </div>
     }
 </div>

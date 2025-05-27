@@ -1,7 +1,8 @@
 ﻿using ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
+using ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
 using System.Diagnostics.CodeAnalysis;
 
-namespace ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
+namespace ControleDeMedicamentos.ConsoleApp.ModuloRequisicaoMedicamento;
 
 public class RequisicaoEntrada
 {

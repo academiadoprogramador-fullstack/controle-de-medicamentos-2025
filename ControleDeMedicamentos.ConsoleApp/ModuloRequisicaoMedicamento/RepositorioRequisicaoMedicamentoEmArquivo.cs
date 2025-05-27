@@ -1,6 +1,6 @@
 ﻿using ControleDeMedicamentos.ConsoleApp.Compartilhado;
 
-namespace ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
+namespace ControleDeMedicamentos.ConsoleApp.ModuloRequisicaoMedicamento;
 
 public class RepositorioRequisicaoMedicamentoEmArquivo : IRepositorioRequisicaoMedicamento
 {

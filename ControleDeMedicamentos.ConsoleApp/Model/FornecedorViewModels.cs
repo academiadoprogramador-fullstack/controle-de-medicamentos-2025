@@ -1,6 +1,5 @@
 using ControleDeMedicamentos.ConsoleApp.Extensions;
 using ControleDeMedicamentos.ConsoleApp.ModuloFornecedor;
-using System;
 
 namespace ControleDeMedicamentos.ConsoleApp.Model;
 
