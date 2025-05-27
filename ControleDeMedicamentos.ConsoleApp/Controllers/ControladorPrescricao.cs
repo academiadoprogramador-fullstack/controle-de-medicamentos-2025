@@ -66,6 +66,7 @@ public class ControladorPrescricao : Controller
             vmAnterior.MedicamentoId = cadastrarVM.MedicamentoId;
             vmAnterior.DosagemMedicamento = cadastrarVM.DosagemMedicamento;
             vmAnterior.PeriodoMedicamento = cadastrarVM.PeriodoMedicamento;
+            vmAnterior.QuantidadeMedicamento = cadastrarVM.QuantidadeMedicamento;
 
             cadastrarVM = vmAnterior;
         }
