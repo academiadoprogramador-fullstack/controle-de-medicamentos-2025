@@ -32,7 +32,8 @@ public static class PrescricaoExtensions
                     var registroSelecionado = new MedicamentoPrescrito(
                         medicamentoCadastrado,
                         selecionarMedicamentoVM.Dosagem,
-                        selecionarMedicamentoVM.Periodo
+                        selecionarMedicamentoVM.Periodo,
+                        selecionarMedicamentoVM.Quantidade
                     );
 
                     registrosSelecionados.Add(registroSelecionado);

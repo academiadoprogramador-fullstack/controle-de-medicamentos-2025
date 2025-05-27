@@ -1,5 +1,7 @@
-﻿using ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
+﻿using ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
+using ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
 using ControleDeMedicamentos.ConsoleApp.ModuloPaciente;
+using ControleDeMedicamentos.ConsoleApp.ModuloPrescricao;
 using System.Diagnostics.CodeAnalysis;
 
 namespace ControleDeMedicamentos.ConsoleApp.ModuloRequisicaoMedicamento;
@@ -8,41 +10,42 @@ public class RequisicaoSaida
 {
     public Guid Id { get; set; }
     public DateTime DataOcorrencia { get; set; }
-    public Paciente Paciente { get; set; }
-    public Medicamento Medicamento { get; set; }
-    public int QuantidadeRequisitada { get; set; }
+    public Funcionario Funcionario { get; set; }
+    public Prescricao Prescricao { get; set; }
 
     [ExcludeFromCodeCoverage]
     public RequisicaoSaida() { }
 
     public RequisicaoSaida(
-        Paciente paciente,
+        Funcionario funcionario,
         Medicamento medicamento,
-        int quantidadeRequisitada
+        Prescricao prescricao
     )
     {
         Id = Guid.NewGuid();
         DataOcorrencia = DateTime.Now;
-        Paciente = paciente;
-        Medicamento = medicamento;
-        QuantidadeRequisitada = quantidadeRequisitada;
+        Funcionario = funcionario;
+        Prescricao = prescricao;
     }
 
     public string Validar()
     {
         string erros = string.Empty;
 
-        if (Paciente == null)
-            erros += "O campo \"Paciente\" é obrigatório.";
+        if (Funcionario == null)
+            erros += "O campo \"Funcionário\" é obrigatório.";
 
-        if (Medicamento == null)
-            erros += "O campo \"Medicamento\" é obrigatório.";
+        else if (Prescricao.MedicamentoPrescritos.Count < 1)
+            erros += "O campo \"Quantidade Requisitada de Medicamentos\" necessita conter um valor positivo.";
 
-        else if (QuantidadeRequisitada < 1)
-            erros += "O campo \"Quantidade Requisitada\" necessita conter um valor positivo.";
+        foreach (var medicamentoPrescrito in Prescricao.MedicamentoPrescritos)
+        {
+            var quantidadeEmEstoque = medicamentoPrescrito.Medicamento.QuantidadeEmEstoque;
 
-        else if (QuantidadeRequisitada > Medicamento.QuantidadeEmEstoque)
-            erros += "O campo \"Quantidade Requisitada\" ultrapassa a quantidade em estoque do medicamento.";
+            if (QuantidadeRequisitada > quantidadeEmEstoque)
+                    erros += "O campo \"Quantidade Requisitada\" ultrapassa a quantidade em estoque do medicamento.";
+
+        }
 
         return erros;
     }

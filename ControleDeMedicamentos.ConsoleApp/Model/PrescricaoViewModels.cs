@@ -18,6 +18,7 @@ public class CadastrarPrescricaoViewModel
     public Guid MedicamentoId { get; set; }
     public string DosagemMedicamento { get; set; }
     public string PeriodoMedicamento { get; set; }
+    public int QuantidadeMedicamento { get; set; }
 
     public CadastrarPrescricaoViewModel()
     {
@@ -59,6 +60,7 @@ public class DetalhesMedicamentoPrescritoViewModel
     public string Medicamento { get; set; }
     public string Dosagem { get; set; }
     public string Periodo { get; set; }
+    public int Quantidade { get; set; }
 
     public DetalhesMedicamentoPrescritoViewModel() { }
 
@@ -66,13 +68,16 @@ public class DetalhesMedicamentoPrescritoViewModel
         Guid medicamentoId,
         string nomeMedicamento,
         string dosagem,
-        string periodo
+        string periodo,
+        int quantidade
+
     ) : this()
     {
         MedicamentoId = medicamentoId;
         Medicamento = nomeMedicamento;
         Dosagem = dosagem;
         Periodo = periodo;
+        Quantidade = quantidade;
     }
 }
 

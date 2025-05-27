@@ -77,7 +77,8 @@ public class ControladorPrescricao : Controller
                 cadastrarVM.MedicamentoId,
                 medicamentoSelecionado.Nome,
                 cadastrarVM.DosagemMedicamento,
-                cadastrarVM.PeriodoMedicamento
+                cadastrarVM.PeriodoMedicamento,
+                cadastrarVM.QuantidadeMedicamento
             );
 
             cadastrarVM.MedicamentoPrescritos.Add(detalhesMedicamentoVM);

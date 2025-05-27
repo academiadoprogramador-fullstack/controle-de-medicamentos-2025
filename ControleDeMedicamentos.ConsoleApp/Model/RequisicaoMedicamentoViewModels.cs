@@ -40,23 +40,24 @@ public class SelecionarFuncionarioViewModel
 
 public class CadastrarRequisicaoSaidaViewModel
 {
-    public Guid MedicamentoId { get; set; }
+    public Guid FuncionarioId { get; set; }
     public Guid PacienteId { get; set; }
-    public int QuantidadeRequisitada { get; set; }
+    public List<SelecionarFuncionarioViewModel> FuncionariosDisponiveis { get; set; }
     public List<SelecionarPacienteViewModel> PacientesDisponiveis { get; set; }
 
     public CadastrarRequisicaoSaidaViewModel() { }
 
-    public CadastrarRequisicaoSaidaViewModel(Guid medicamentoId, List<Paciente> pacientes)
+    public CadastrarRequisicaoSaidaViewModel(Guid funcionarioId, Guid prescricaoId, List<Funcionario> funcionarios, List<Paciente> pacientes)
     {
-        MedicamentoId = medicamentoId;
-        PacientesDisponiveis = new List<SelecionarPacienteViewModel>();
+        FuncionarioId = funcionarioId;
+        PrescricaoId = prescricaoId;
+        FuncionariosDisponiveis = new List<SelecionarFuncionarioViewModel>();
 
-        foreach (var p in pacientes)
+        foreach (var f in funcionarios)
         {
-            var selecionarVM = new SelecionarPacienteViewModel(p.Id, p.Nome);
+            var selecionarVM = new SelecionarFuncionarioViewModel(f.Id, f.Nome);
 
-            PacientesDisponiveis.Add(selecionarVM);
+            FuncionariosDisponiveis.Add(selecionarVM);
         }
     }
 }

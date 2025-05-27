@@ -11,19 +11,10 @@
 
 <link rel="stylesheet" href="~/form.css" />
 
-<form action="/requisicoes-medicamentos/saida/@Model.MedicamentoId" method="post">
-    <label for="medicamentoId">Id do Medicamento:</label>
-    <input type="text" name="nome" value="@Model.MedicamentoId" readonly disabled/>
-
-    <label for="nome">Nome do Medicamento:</label>
-    <p style="margin-top: 5px; color: var(--cor-principal); font-size: 18px; font-weight: 600;">@nomeMedicamento</p>
-
-    <label for="quantidadeRequisitada">Quantidade Requisitada:</label>
-    <input type="number" name="quantidadeRequisitada" value="@Model.QuantidadeRequisitada"/>
-
-    <label for="pacienteId">Paciente Requisitante:</label>
-    <select name="pacienteId" id="pacienteId">
-        @foreach (var f in Model.PacientesDisponiveis)
+<form action="/requisicoes-medicamentos/saida/cadastrar" method="post">
+    <label for="funcionarioId">Funcionário Requisitante:</label>
+    <select name="funcionarioId" id="funcionarioId">
+        @foreach (var f in Model.FuncionariosDisponiveis)
         {
             <option value="@f.Id">@f.Nome</option>
         }
