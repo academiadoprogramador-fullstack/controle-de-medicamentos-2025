@@ -1,6 +1,6 @@
 ﻿using ControleDeMedicamentos.ConsoleApp.Model;
-using ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
-using ControleDeMedicamentos.ConsoleApp.ModuloPaciente;
+using ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
+using ControleDeMedicamentos.ConsoleApp.ModuloPrescricao;
 using ControleDeMedicamentos.ConsoleApp.ModuloRequisicaoMedicamento;
 
 namespace ControleDeMedicamentos.ConsoleApp.Extensions;
@@ -8,27 +8,38 @@ namespace ControleDeMedicamentos.ConsoleApp.Extensions;
 public static class RequisicaoSaidaExtensions
 {
     public static RequisicaoSaida ParaEntidade(
-        this CadastrarRequisicaoSaidaViewModel formularioVM,
-        List<Paciente> pacientes,
-        List<Medicamento> medicamentos
-    )
+         this CadastrarRequisicaoSaidaCompletaViewModel formularioVM,
+         List<Funcionario> funcionarios,
+         List<Prescricao> prescricoes
+     )
     {
-        Paciente pacienteSelecionado = null;
+        Funcionario funcionarioSelecionado = null;
 
-        foreach (var f in pacientes)
+        foreach (var f in funcionarios)
         {
-            if (f.Id == formularioVM.PacienteId)
-                pacienteSelecionado = f;
+            if (f.Id == formularioVM.FuncionarioId)
+                funcionarioSelecionado = f;
         }
 
-        Medicamento medicamentoSelecionado = null;
+        Prescricao prescricaoSelecionada = null;
 
-        foreach (var m in medicamentos)
+        foreach (var p in prescricoes)
         {
-            if (m.Id == formularioVM.MedicamentoId)
-                medicamentoSelecionado = m;
+            if (p.Id == formularioVM.PrescricaoId)
+                prescricaoSelecionada = p;
         }
 
-        return new RequisicaoSaida(pacienteSelecionado, medicamentoSelecionado, formularioVM.QuantidadeRequisitada);
+        return new RequisicaoSaida(funcionarioSelecionado, prescricaoSelecionada);
+    }
+
+    public static DetalhesRequisicaoSaidaViewModel ParaDetalhesVM(this RequisicaoSaida requisicao)
+    {
+        return new DetalhesRequisicaoSaidaViewModel(
+            requisicao.Id,
+            requisicao.Funcionario.Nome,
+            requisicao.Prescricao.Paciente.Nome,
+            requisicao.DataOcorrencia,
+            requisicao.Prescricao.MedicamentoPrescritos
+        );
     }
 }

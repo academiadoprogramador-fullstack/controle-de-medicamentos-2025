@@ -62,39 +62,4 @@ public class ControladorRequisicaoMedicamento : Controller
 
         return View("Notificacao", notificacaoVM);
     }
-
-    [HttpGet("saida/{medicamentoId:guid}")]
-    public IActionResult CadastrarSaida(Guid medicamentoId)
-    {
-        var pacientes = repositorioPaciente.SelecionarRegistros();
-        var medicamentoSelecionado = repositorioMedicamento.SelecionarRegistroPorId(medicamentoId);
-
-        var cadastrarVM = new CadastrarRequisicaoSaidaViewModel(medicamentoId, pacientes);
-
-        ViewBag.NomeMedicamento = medicamentoSelecionado.Nome;
-
-        return View(cadastrarVM);
-    }
-
-    [HttpPost("saida/{medicamentoId:guid}")]
-    public IActionResult CadastrarSaida(Guid medicamentoId, CadastrarRequisicaoSaidaViewModel cadastrarVM)
-    {
-        var pacientes = repositorioPaciente.SelecionarRegistros();
-        var medicamentos = repositorioMedicamento.SelecionarRegistros();
-
-        var registro = cadastrarVM.ParaEntidade(pacientes, medicamentos);
-
-        var medicamentoSelecionado = repositorioMedicamento.SelecionarRegistroPorId(medicamentoId);
-
-        medicamentoSelecionado.RemoverDoEstoque(registro);
-
-        repositorioRequisicaoMedicamento.CadastrarRequisicaoSaida(registro);
-
-        NotificacaoViewModel notificacaoVM = new NotificacaoViewModel(
-            "Requisição de Saída Cadastrada!",
-            $"O estoque do medicamento foi atualizado!"
-        );
-
-        return View("Notificacao", notificacaoVM);
-    }
 }
