@@ -5,11 +5,15 @@
 @{
     Layout = "_Layout";
     ViewBag.Titulo = "Cadastro de Requisição de Saída de Medicamento";
-
-    string nomeMedicamento = ViewBag.NomeMedicamento;
 }
 
 <link rel="stylesheet" href="~/form.css" />
+
+<style>
+    h2 {
+        margin-bottom: 15px;
+    }
+</style>
 
 <form action="/requisicoes-medicamentos/saida/cadastrar" method="post">
     <h2>Informações da Requisição</h2>
