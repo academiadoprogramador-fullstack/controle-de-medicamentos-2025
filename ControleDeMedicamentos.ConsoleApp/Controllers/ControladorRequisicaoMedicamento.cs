@@ -62,4 +62,14 @@ public class ControladorRequisicaoMedicamento : Controller
 
         return View("Notificacao", notificacaoVM);
     }
+
+    [HttpGet("saida/visualizar")]
+    public IActionResult VisualizarRequisicoesSaida()
+    {
+        var registros = repositorioRequisicaoMedicamento.SelecionarRequisicoesSaida();
+
+        var visualizarVM = new VisualizarRequisicoesSaidaViewModel(registros);
+
+        return View(visualizarVM);
+    }
 }
