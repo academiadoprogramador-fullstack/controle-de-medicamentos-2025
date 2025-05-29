@@ -4,6 +4,7 @@ using ControleDeMedicamentos.ConsoleApp.Model;
 using ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
 using ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
 using ControleDeMedicamentos.ConsoleApp.ModuloPaciente;
+using ControleDeMedicamentos.ConsoleApp.ModuloRequisicaoMedicamento;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ControleDeMedicamentos.ConsoleApp.Controllers;

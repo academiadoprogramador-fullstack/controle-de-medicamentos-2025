@@ -1,7 +1,8 @@
-﻿using ControleDeMedicamentos.ConsoleApp.ModuloPaciente;
+﻿using ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
+using ControleDeMedicamentos.ConsoleApp.ModuloPaciente;
 using System.Diagnostics.CodeAnalysis;
 
-namespace ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
+namespace ControleDeMedicamentos.ConsoleApp.ModuloRequisicaoMedicamento;
 
 public class RequisicaoSaida
 {

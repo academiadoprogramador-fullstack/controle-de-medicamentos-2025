@@ -1,5 +1,6 @@
 ﻿using ControleDeMedicamentos.ConsoleApp.Compartilhado;
 using ControleDeMedicamentos.ConsoleApp.ModuloFornecedor;
+using ControleDeMedicamentos.ConsoleApp.ModuloRequisicaoMedicamento;
 using System.Diagnostics.CodeAnalysis;
 
 namespace ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
