@@ -52,11 +52,12 @@
     {
         <div class="card">
             <div class="cabecalho-card">
-                <h3>@m.DataEmissao</h3>
+                <h3>@m.DataEmissao.ToShortDateString()</h3>
             </div>
 
             <p><strong>CRM do Médico:</strong> @m.CrmMedico</p>
             <p><strong>Paciente:</strong> @m.Paciente</p>
+            <p><strong>Medicamentos:</strong> @string.Join(", ", m.MedicamentoPrescritos)</p>
         </div>
     }
 </div>

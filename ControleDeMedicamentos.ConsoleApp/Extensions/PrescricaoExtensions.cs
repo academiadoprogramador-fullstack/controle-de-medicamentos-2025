@@ -50,7 +50,8 @@ public static class PrescricaoExtensions
             prescricao.Id,
             prescricao.CrmMedico,
             prescricao.Paciente.Nome,
-            prescricao.DataEmissao
+            prescricao.DataEmissao,
+            prescricao.MedicamentoPrescritos
         );
     }
 }
