@@ -22,7 +22,10 @@ public class Medicamento : EntidadeBase<Medicamento>
                 quantidadeEmEstoque += req.QuantidadeRequisitada;
 
             foreach (var req in RequisicoesSaida)
-                quantidadeEmEstoque -= req.QuantidadeRequisitada;
+            {
+                foreach (var med in req.Prescricao.MedicamentoPrescritos)
+                    quantidadeEmEstoque -= med.Quantidade;
+            }
 
             return quantidadeEmEstoque;
         }

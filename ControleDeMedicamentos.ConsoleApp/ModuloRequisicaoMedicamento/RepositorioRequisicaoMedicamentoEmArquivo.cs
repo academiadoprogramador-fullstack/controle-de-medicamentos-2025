@@ -29,4 +29,9 @@ public class RepositorioRequisicaoMedicamentoEmArquivo : IRepositorioRequisicaoM
 
         contexto.Salvar();
     }
+
+    public List<RequisicaoSaida> SelecionarRequisicoesSaida()
+    {
+        return requisicoesSaida;
+    }
 }

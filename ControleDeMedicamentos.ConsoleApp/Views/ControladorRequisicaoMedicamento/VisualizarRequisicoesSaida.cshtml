@@ -1,0 +1,63 @@
+﻿﻿@using ControleDeMedicamentos.ConsoleApp.Model
+
+@model VisualizarRequisicoesSaidaViewModel;
+
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Visualização de Requisições de Saída";
+}
+
+<style>
+    #botaoCadastrar {
+        padding: 10px 20px;
+        width: 220px;
+        border: 1px solid var(--cor-principal);
+        border-radius: 9px;
+        background-color: var(--cor-principal);
+        color: var(--cor-neutra);
+        text-align: center;
+    }
+
+    .card {
+        height: 220px;
+    }
+
+    .botoes-interacao {
+        display: flex;
+        gap: 5px;
+        justify-content: end;
+        align-items: center;
+        margin-top: 30px;
+    }
+
+    .botoes-interacao > a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 90px;
+        height: 30px;
+        border: 1px solid var(--cor-principal);
+        border-radius: 9px;
+        background-color: var(--cor-principal);
+        color: var(--cor-neutra);
+        cursor: pointer;
+        font-size: 16px;
+    }
+</style>
+
+<a href="/requisicoes-medicamentos/saida/cadastrar" type="button" id="botaoCadastrar">Cadastrar Nova Requisição de Saída</a>
+
+<div class="secao-cards">
+    @foreach (var m in Model.Registros)
+    {
+        <div class="card">
+            <div class="cabecalho-card">
+                <h3>@m.DataOcorrencia.ToShortDateString()</h3>
+            </div>
+
+            <p><strong>Funcionário Requisitante:</strong> @m.FuncionarioRequisitante</p>
+            <p><strong>Paciente:</strong> @m.Paciente</p>
+            <p><strong>Medicamentos:</strong> @string.Join(", ", m.MedicamentoPrescritos)</p>
+        </div>
+    }
+</div>

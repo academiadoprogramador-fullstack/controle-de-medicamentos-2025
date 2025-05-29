@@ -3,7 +3,6 @@ using ControleDeMedicamentos.ConsoleApp.Extensions;
 using ControleDeMedicamentos.ConsoleApp.Model;
 using ControleDeMedicamentos.ConsoleApp.ModuloFornecedor;
 using Microsoft.AspNetCore.Mvc;
-using System;
 
 namespace ControleDeMedicamentos.ConsoleApp.Controllers;
 

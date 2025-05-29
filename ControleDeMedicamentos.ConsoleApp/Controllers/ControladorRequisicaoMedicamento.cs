@@ -4,6 +4,7 @@ using ControleDeMedicamentos.ConsoleApp.Model;
 using ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
 using ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
 using ControleDeMedicamentos.ConsoleApp.ModuloPaciente;
+using ControleDeMedicamentos.ConsoleApp.ModuloPrescricao;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ControleDeMedicamentos.ConsoleApp.Controllers;
@@ -16,6 +17,7 @@ public class ControladorRequisicaoMedicamento : Controller
     private IRepositorioFuncionario repositorioFuncionario;
     private IRepositorioMedicamento repositorioMedicamento;
     private IRepositorioPaciente repositorioPaciente;
+    private IRepositorioPrescricao repositorioPrescricao;
 
     public ControladorRequisicaoMedicamento()
     {
@@ -24,6 +26,7 @@ public class ControladorRequisicaoMedicamento : Controller
         repositorioFuncionario = new RepositorioFuncionarioEmArquivo(contextoDados);
         repositorioMedicamento = new RepositorioMedicamentoEmArquivo(contextoDados);
         repositorioPaciente = new RepositorioPacienteEmArquivo(contextoDados);
+        repositorioPrescricao = new RepositorioPrescricaoEmArquivo(contextoDados);
     }
 
     [HttpGet("entrada/{medicamentoId:guid}")]
@@ -62,32 +65,73 @@ public class ControladorRequisicaoMedicamento : Controller
         return View("Notificacao", notificacaoVM);
     }
 
-    [HttpGet("saida/{medicamentoId:guid}")]
-    public IActionResult CadastrarSaida(Guid medicamentoId)
+    [HttpGet("saida/cadastrar")]
+    public IActionResult CadastrarSaida()
     {
         var pacientes = repositorioPaciente.SelecionarRegistros();
-        var medicamentoSelecionado = repositorioMedicamento.SelecionarRegistroPorId(medicamentoId);
+        var funcionarios = repositorioFuncionario.SelecionarRegistros();
 
-        var cadastrarVM = new CadastrarRequisicaoSaidaViewModel(medicamentoId, pacientes);
-
-        ViewBag.NomeMedicamento = medicamentoSelecionado.Nome;
+        var cadastrarVM = new CadastrarRequisicaoSaidaViewModel(funcionarios, pacientes);
 
         return View(cadastrarVM);
     }
 
-    [HttpPost("saida/{medicamentoId:guid}")]
-    public IActionResult CadastrarSaida(Guid medicamentoId, CadastrarRequisicaoSaidaViewModel cadastrarVM)
+    [HttpPost("saida/cadastrar")]
+    public IActionResult CadastrarSaida(CadastrarRequisicaoSaidaViewModel cadastrarVM)
     {
         var pacientes = repositorioPaciente.SelecionarRegistros();
-        var medicamentos = repositorioMedicamento.SelecionarRegistros();
+        var funcionarios = repositorioFuncionario.SelecionarRegistros();
+        var prescricoes = repositorioPrescricao.SelecionarRegistros();
 
-        var registro = cadastrarVM.ParaEntidade(pacientes, medicamentos);
+        Funcionario funcionarioSelecionado = null;
 
-        var medicamentoSelecionado = repositorioMedicamento.SelecionarRegistroPorId(medicamentoId);
+        foreach (var f in funcionarios)
+        {
+            if (f.Id == cadastrarVM.FuncionarioId)
+                funcionarioSelecionado = f;
+        }
 
-        medicamentoSelecionado.RemoverDoEstoque(registro);
+        Paciente pacienteSelecionado = null;
 
-        repositorioRequisicaoMedicamento.CadastrarRequisicaoSaida(registro);
+        foreach (var p in pacientes)
+        {
+            if (p.Id == cadastrarVM.PacienteId)
+                pacienteSelecionado = p;
+        }
+
+        var prescricoesDoPaciente = new List<Prescricao>();
+
+        foreach (var p in prescricoes)
+        {
+            if (p.Paciente.Id == pacienteSelecionado!.Id)
+                prescricoesDoPaciente.Add(p);
+        }
+
+        var cadastrarRequisicaoSaidaCompletaVM = new CadastrarRequisicaoSaidaCompletaViewModel(
+            funcionarioSelecionado!,
+            pacienteSelecionado!,
+            prescricoesDoPaciente
+        );
+
+        return View("CadastrarSaidaCompleta", cadastrarRequisicaoSaidaCompletaVM);
+    }
+
+    [HttpPost("saida/completar-cadastro")]
+    public IActionResult CadastrarSaidaCompleta(CadastrarRequisicaoSaidaCompletaViewModel cadastrarRequisicaoSaidaCompletaVM)
+    {
+        var funcionarios = repositorioFuncionario.SelecionarRegistros();
+        var prescricoes = repositorioPrescricao.SelecionarRegistros();
+
+        var entidade = cadastrarRequisicaoSaidaCompletaVM.ParaEntidade(funcionarios, prescricoes);
+
+        foreach (var medicamentoPrescrito in entidade.Prescricao.MedicamentoPrescritos)
+        {
+            var registroMedicamento = medicamentoPrescrito.Medicamento;
+
+            registroMedicamento.RemoverDoEstoque(entidade);
+        }
+
+        repositorioRequisicaoMedicamento.CadastrarRequisicaoSaida(entidade);
 
         NotificacaoViewModel notificacaoVM = new NotificacaoViewModel(
             "Requisição de Saída Cadastrada!",
@@ -95,5 +139,15 @@ public class ControladorRequisicaoMedicamento : Controller
         );
 
         return View("Notificacao", notificacaoVM);
+    }
+
+    [HttpGet("saida/visualizar")]
+    public IActionResult VisualizarRequisicoesSaida()
+    {
+        var registros = repositorioRequisicaoMedicamento.SelecionarRequisicoesSaida();
+
+        var visualizarVM = new VisualizarRequisicoesSaidaViewModel(registros);
+
+        return View(visualizarVM);
     }
 }
