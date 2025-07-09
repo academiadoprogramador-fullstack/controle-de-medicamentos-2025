@@ -3,10 +3,10 @@
 namespace ControleDeMedicamentos.ConsoleApp.Controllers;
 
 [Route("/")]
-public class ControladorInicial : Controller
+public class HomeController : Controller
 {
     [HttpGet]
-    public IActionResult PaginaInicial()
+    public IActionResult Index()
     {
         return View();
     }

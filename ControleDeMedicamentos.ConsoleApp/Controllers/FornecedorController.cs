@@ -1,38 +1,37 @@
-﻿using ControleDeMedicamentos.ConsoleApp.Extensions;
+using ControleDeMedicamentos.ConsoleApp.Extensions;
 using ControleDeMedicamentos.ConsoleApp.Models;
-using ControleDeMedicamentos.Dominio.ModuloFuncionario;
+using ControleDeMedicamentos.Dominio.ModuloFornecedor;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ControleDeMedicamentos.ConsoleApp.Controllers;
 
-[Route("/funcionarios")]
-public class ControladorFuncionario : Controller
+[Route("fornecedores")]
+public class FornecedorController : Controller
 {
-    private readonly IRepositorioFuncionario repositorioFuncionario;
+    private readonly IRepositorioFornecedor repositorioFornecedor;
 
-    public ControladorFuncionario(IRepositorioFuncionario repositorioFuncionario)
+    public FornecedorController(IRepositorioFornecedor repositorioFornecedor)
     {
-        this.repositorioFuncionario = repositorioFuncionario;
+        this.repositorioFornecedor = repositorioFornecedor;
     }
 
     [HttpGet("cadastrar")]
     public IActionResult Cadastrar()
     {
-        var cadastrarVM = new CadastrarFuncionarioViewModel();
-
+        var cadastrarVM = new CadastrarFornecedorViewModel();
         return View("Cadastrar", cadastrarVM);
     }
 
     [HttpPost("cadastrar")]
-    public IActionResult Cadastrar(CadastrarFuncionarioViewModel cadastrarVM)
+    public IActionResult Cadastrar(CadastrarFornecedorViewModel cadastrarVM)
     {
-        var novoFuncionario = cadastrarVM.ParaEntidade();
+        var novoFornecedor = cadastrarVM.ParaEntidade();
 
-        repositorioFuncionario.CadastrarRegistro(novoFuncionario);
+        repositorioFornecedor.CadastrarRegistro(novoFornecedor);
 
         NotificacaoViewModel notificacaoVM = new NotificacaoViewModel(
-            "Funcionário Cadastrado!",
-            $"O registro \"{novoFuncionario.Nome}\" foi cadastrado com sucesso!"
+            "Fornecedor Cadastrado!",
+            $"O registro \"{novoFornecedor.Nome}\" foi cadastrado com sucesso!"
         );
 
         return View("Notificacao", notificacaoVM);
@@ -41,27 +40,27 @@ public class ControladorFuncionario : Controller
     [HttpGet("editar/{id:guid}")]
     public IActionResult Editar([FromRoute] Guid id)
     {
-        var registroSelecionado = repositorioFuncionario.SelecionarRegistroPorId(id);
+        var registroSelecionado = repositorioFornecedor.SelecionarRegistroPorId(id);
 
-        var editarVM = new EditarFuncionarioViewModel(
+        var editarVM = new EditarFornecedorViewModel(
             id,
             registroSelecionado.Nome,
             registroSelecionado.Telefone,
-            registroSelecionado.Cpf
+            registroSelecionado.CNPJ
         );
 
         return View(editarVM);
     }
 
     [HttpPost("editar/{id:guid}")]
-    public IActionResult Editar([FromRoute] Guid id, EditarFuncionarioViewModel editarVM)
+    public IActionResult Editar([FromRoute] Guid id, EditarFornecedorViewModel editarVM)
     {
         var registroEditado = editarVM.ParaEntidade();
 
-        repositorioFuncionario.EditarRegistro(id, registroEditado);
+        repositorioFornecedor.EditarRegistro(id, registroEditado);
 
         NotificacaoViewModel notificacaoVM = new NotificacaoViewModel(
-            "Funcionário Editado!",
+            "Fornecedor Editado!",
             $"O registro \"{registroEditado.Nome}\" foi editado com sucesso!"
         );
 
@@ -71,9 +70,9 @@ public class ControladorFuncionario : Controller
     [HttpGet("excluir/{id:guid}")]
     public IActionResult Excluir([FromRoute] Guid id)
     {
-        var registroSelecionado = repositorioFuncionario.SelecionarRegistroPorId(id);
+        var registroSelecionado = repositorioFornecedor.SelecionarRegistroPorId(id);
 
-        var excluirVM = new ExcluirFuncionarioViewModel(
+        var excluirVM = new ExcluirFornecedorViewModel(
             registroSelecionado.Id,
             registroSelecionado.Nome
         );
@@ -84,11 +83,11 @@ public class ControladorFuncionario : Controller
     [HttpPost("excluir/{id:guid}")]
     public IActionResult ExcluirConfirmado([FromRoute] Guid id)
     {
-        repositorioFuncionario.ExcluirRegistro(id);
+        repositorioFornecedor.ExcluirRegistro(id);
 
         NotificacaoViewModel notificacaoVM = new NotificacaoViewModel(
-            "Funcionário Excluído!",
-            "O registro foi excluído com sucesso!"
+            "Fornecedor Exclu�do!",
+            "O registro foi exclu�do com sucesso!"
         );
 
         return View("Notificacao", notificacaoVM);
@@ -97,9 +96,9 @@ public class ControladorFuncionario : Controller
     [HttpGet("visualizar")]
     public IActionResult Visualizar()
     {
-        var registros = repositorioFuncionario.SelecionarRegistros();
+        var registros = repositorioFornecedor.SelecionarRegistros();
 
-        var visualizarVM = new VisualizarFuncionariosViewModel(registros);
+        var visualizarVM = new VisualizarFornecedoresViewModel(registros);
 
         return View(visualizarVM);
     }

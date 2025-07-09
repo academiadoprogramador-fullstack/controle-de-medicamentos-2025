@@ -9,13 +9,13 @@ using System.Text.Json;
 namespace ControleDeMedicamentos.ConsoleApp.Controllers;
 
 [Route("prescricoes-medicas")]
-public class ControladorPrescricao : Controller
+public class PrescricaoController : Controller
 {
     private IRepositorioPrescricao repositorioPrescricao;
     private IRepositorioPaciente repositorioPaciente;
     private IRepositorioMedicamento repositorioMedicamento;
 
-    public ControladorPrescricao(
+    public PrescricaoController(
         IRepositorioPrescricao repositorioPrescricao,
         IRepositorioPaciente repositorioPaciente,
         IRepositorioMedicamento repositorioMedicamento

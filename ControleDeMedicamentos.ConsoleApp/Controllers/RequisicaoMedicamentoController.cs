@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ControleDeMedicamentos.ConsoleApp.Controllers;
 
 [Route("requisicoes-medicamentos")]
-public class ControladorRequisicaoMedicamento : Controller
+public class RequisicaoMedicamentoController : Controller
 {
     private IRepositorioRequisicaoMedicamento repositorioRequisicaoMedicamento;
     private IRepositorioFuncionario repositorioFuncionario;
@@ -18,7 +18,7 @@ public class ControladorRequisicaoMedicamento : Controller
     private IRepositorioPaciente repositorioPaciente;
     private IRepositorioPrescricao repositorioPrescricao;
 
-    public ControladorRequisicaoMedicamento(
+    public RequisicaoMedicamentoController(
         IRepositorioRequisicaoMedicamento repositorioRequisicaoMedicamento,
         IRepositorioFuncionario repositorioFuncionario,
         IRepositorioMedicamento repositorioMedicamento,

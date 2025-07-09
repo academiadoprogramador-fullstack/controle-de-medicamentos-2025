@@ -7,12 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace ControleDeMedicamentos.ConsoleApp.Controllers;
 
 [Route("medicamentos")]
-public class ControladorMedicamento : Controller
+public class MedicamentoController : Controller
 {
     private readonly IRepositorioMedicamento repositorioMedicamento;
     private readonly IRepositorioFornecedor repositorioFornecedor;
 
-    public ControladorMedicamento(
+    public MedicamentoController(
         IRepositorioMedicamento repositorioMedicamento,
         IRepositorioFornecedor repositorioFornecedor
     )
