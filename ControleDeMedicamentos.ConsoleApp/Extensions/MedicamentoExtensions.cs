@@ -1,6 +1,6 @@
-﻿using ControleDeMedicamentos.ConsoleApp.Model;
-using ControleDeMedicamentos.ConsoleApp.ModuloFornecedor;
-using ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
+﻿using ControleDeMedicamentos.ConsoleApp.Models;
+using ControleDeMedicamentos.Dominio.ModuloFornecedor;
+using ControleDeMedicamentos.Dominio.ModuloMedicamento;
 
 namespace ControleDeMedicamentos.ConsoleApp.Extensions;
 

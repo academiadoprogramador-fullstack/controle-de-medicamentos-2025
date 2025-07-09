@@ -1,11 +1,10 @@
-﻿using ControleDeMedicamentos.ConsoleApp.Compartilhado;
-using ControleDeMedicamentos.ConsoleApp.Extensions;
-using ControleDeMedicamentos.ConsoleApp.Model;
-using ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
-using ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
-using ControleDeMedicamentos.ConsoleApp.ModuloPaciente;
-using ControleDeMedicamentos.ConsoleApp.ModuloPrescricao;
-using ControleDeMedicamentos.ConsoleApp.ModuloRequisicaoMedicamento;
+﻿using ControleDeMedicamentos.ConsoleApp.Extensions;
+using ControleDeMedicamentos.ConsoleApp.Models;
+using ControleDeMedicamentos.Dominio.ModuloFuncionario;
+using ControleDeMedicamentos.Dominio.ModuloMedicamento;
+using ControleDeMedicamentos.Dominio.ModuloPaciente;
+using ControleDeMedicamentos.Dominio.ModuloPrescricao;
+using ControleDeMedicamentos.Dominio.ModuloRequisicaoMedicamentos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ControleDeMedicamentos.ConsoleApp.Controllers;
@@ -13,21 +12,25 @@ namespace ControleDeMedicamentos.ConsoleApp.Controllers;
 [Route("requisicoes-medicamentos")]
 public class ControladorRequisicaoMedicamento : Controller
 {
-    private ContextoDados contextoDados;
     private IRepositorioRequisicaoMedicamento repositorioRequisicaoMedicamento;
     private IRepositorioFuncionario repositorioFuncionario;
     private IRepositorioMedicamento repositorioMedicamento;
     private IRepositorioPaciente repositorioPaciente;
     private IRepositorioPrescricao repositorioPrescricao;
 
-    public ControladorRequisicaoMedicamento()
+    public ControladorRequisicaoMedicamento(
+        IRepositorioRequisicaoMedicamento repositorioRequisicaoMedicamento,
+        IRepositorioFuncionario repositorioFuncionario,
+        IRepositorioMedicamento repositorioMedicamento,
+        IRepositorioPaciente repositorioPaciente,
+        IRepositorioPrescricao repositorioPrescricao
+    )
     {
-        contextoDados = new ContextoDados(true);
-        repositorioRequisicaoMedicamento = new RepositorioRequisicaoMedicamentoEmArquivo(contextoDados);
-        repositorioFuncionario = new RepositorioFuncionarioEmArquivo(contextoDados);
-        repositorioMedicamento = new RepositorioMedicamentoEmArquivo(contextoDados);
-        repositorioPaciente = new RepositorioPacienteEmArquivo(contextoDados);
-        repositorioPrescricao = new RepositorioPrescricaoEmArquivo(contextoDados);
+        this.repositorioRequisicaoMedicamento = repositorioRequisicaoMedicamento;
+        this.repositorioFuncionario = repositorioFuncionario;
+        this.repositorioMedicamento = repositorioMedicamento;
+        this.repositorioPaciente = repositorioPaciente;
+        this.repositorioPrescricao = repositorioPrescricao;
     }
 
     [HttpGet("entrada/{medicamentoId:guid}")]

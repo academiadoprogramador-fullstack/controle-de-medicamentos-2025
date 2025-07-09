@@ -1,9 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35931.197 d17.13
+VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleDeMedicamentos.ConsoleApp", "ControleDeMedicamentos.ConsoleApp\ControleDeMedicamentos.ConsoleApp.csproj", "{5B3C0F98-E546-48BA-B8BE-88466A52988B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Apresentação", "1. Apresentação", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Domínio", "2. Domínio", "{FA0FB6FF-CEFD-4B10-9334-71796A313554}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Infraestrutura", "3. Infraestrutura", "{A3447628-9A2C-47FF-89F4-8F7015DFDD40}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleDeMedicamentos.Dominio", "ControleDeMedicamentos.Dominio\ControleDeMedicamentos.Dominio.csproj", "{48C56210-FFC9-41A9-80AE-F0BB5E1B8D53}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleDeMedicamentos.Infraestrutura.Arquivos", "ControleDeMedicamentos.Infraestrutura.Arquivos\ControleDeMedicamentos.Infraestrutura.Arquivos.csproj", "{E941FB67-1F07-4FAA-B99B-3B6CC698D13D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +25,22 @@ Global
 		{5B3C0F98-E546-48BA-B8BE-88466A52988B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B3C0F98-E546-48BA-B8BE-88466A52988B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B3C0F98-E546-48BA-B8BE-88466A52988B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48C56210-FFC9-41A9-80AE-F0BB5E1B8D53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48C56210-FFC9-41A9-80AE-F0BB5E1B8D53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48C56210-FFC9-41A9-80AE-F0BB5E1B8D53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48C56210-FFC9-41A9-80AE-F0BB5E1B8D53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E941FB67-1F07-4FAA-B99B-3B6CC698D13D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E941FB67-1F07-4FAA-B99B-3B6CC698D13D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E941FB67-1F07-4FAA-B99B-3B6CC698D13D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E941FB67-1F07-4FAA-B99B-3B6CC698D13D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5B3C0F98-E546-48BA-B8BE-88466A52988B} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{48C56210-FFC9-41A9-80AE-F0BB5E1B8D53} = {FA0FB6FF-CEFD-4B10-9334-71796A313554}
+		{E941FB67-1F07-4FAA-B99B-3B6CC698D13D} = {A3447628-9A2C-47FF-89F4-8F7015DFDD40}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C849F7EA-CFF3-4544-8DF9-CFCDE8B9E923}

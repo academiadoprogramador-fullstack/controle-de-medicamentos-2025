@@ -1,7 +1,7 @@
-﻿using ControleDeMedicamentos.ConsoleApp.Model;
-using ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
-using ControleDeMedicamentos.ConsoleApp.ModuloPrescricao;
-using ControleDeMedicamentos.ConsoleApp.ModuloRequisicaoMedicamento;
+﻿using ControleDeMedicamentos.ConsoleApp.Models;
+using ControleDeMedicamentos.Dominio.ModuloFuncionario;
+using ControleDeMedicamentos.Dominio.ModuloPrescricao;
+using ControleDeMedicamentos.Dominio.ModuloRequisicaoMedicamentos;
 
 namespace ControleDeMedicamentos.ConsoleApp.Extensions;
 

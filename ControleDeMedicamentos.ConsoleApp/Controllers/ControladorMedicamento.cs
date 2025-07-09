@@ -1,8 +1,7 @@
-﻿using ControleDeMedicamentos.ConsoleApp.Compartilhado;
-using ControleDeMedicamentos.ConsoleApp.Extensions;
-using ControleDeMedicamentos.ConsoleApp.Model;
-using ControleDeMedicamentos.ConsoleApp.ModuloFornecedor;
-using ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
+﻿using ControleDeMedicamentos.ConsoleApp.Extensions;
+using ControleDeMedicamentos.ConsoleApp.Models;
+using ControleDeMedicamentos.Dominio.ModuloFornecedor;
+using ControleDeMedicamentos.Dominio.ModuloMedicamento;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ControleDeMedicamentos.ConsoleApp.Controllers;
@@ -10,15 +9,16 @@ namespace ControleDeMedicamentos.ConsoleApp.Controllers;
 [Route("medicamentos")]
 public class ControladorMedicamento : Controller
 {
-    private readonly ContextoDados contextoDados;
     private readonly IRepositorioMedicamento repositorioMedicamento;
     private readonly IRepositorioFornecedor repositorioFornecedor;
 
-    public ControladorMedicamento()
+    public ControladorMedicamento(
+        IRepositorioMedicamento repositorioMedicamento,
+        IRepositorioFornecedor repositorioFornecedor
+    )
     {
-        contextoDados = new ContextoDados(true);
-        repositorioMedicamento = new RepositorioMedicamentoEmArquivo(contextoDados);
-        repositorioFornecedor = new RepositorioFornecedorEmArquivo(contextoDados);
+        this.repositorioMedicamento = repositorioMedicamento;
+        this.repositorioFornecedor = repositorioFornecedor;
     }
 
     [HttpGet("cadastrar")]

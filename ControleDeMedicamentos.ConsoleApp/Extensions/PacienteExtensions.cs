@@ -1,5 +1,5 @@
-using ControleDeMedicamentos.ConsoleApp.Model;
-using ControleDeMedicamentos.ConsoleApp.ModuloPaciente;
+using ControleDeMedicamentos.ConsoleApp.Models;
+using ControleDeMedicamentos.Dominio.ModuloPaciente;
 
 namespace ControleDeMedicamentos.ConsoleApp.Extensions;
 

@@ -1,7 +1,6 @@
-﻿using ControleDeMedicamentos.ConsoleApp.Compartilhado;
-using ControleDeMedicamentos.ConsoleApp.Extensions;
-using ControleDeMedicamentos.ConsoleApp.Model;
-using ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
+﻿using ControleDeMedicamentos.ConsoleApp.Extensions;
+using ControleDeMedicamentos.ConsoleApp.Models;
+using ControleDeMedicamentos.Dominio.ModuloFuncionario;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ControleDeMedicamentos.ConsoleApp.Controllers;
@@ -9,13 +8,11 @@ namespace ControleDeMedicamentos.ConsoleApp.Controllers;
 [Route("/funcionarios")]
 public class ControladorFuncionario : Controller
 {
-    private readonly ContextoDados contextoDados;
     private readonly IRepositorioFuncionario repositorioFuncionario;
 
-    public ControladorFuncionario()
+    public ControladorFuncionario(IRepositorioFuncionario repositorioFuncionario)
     {
-        contextoDados = new ContextoDados(true);
-        repositorioFuncionario = new RepositorioFuncionarioEmArquivo(contextoDados);
+        this.repositorioFuncionario = repositorioFuncionario;
     }
 
     [HttpGet("cadastrar")]

@@ -1,7 +1,6 @@
-using ControleDeMedicamentos.ConsoleApp.Compartilhado;
 using ControleDeMedicamentos.ConsoleApp.Extensions;
-using ControleDeMedicamentos.ConsoleApp.Model;
-using ControleDeMedicamentos.ConsoleApp.ModuloPaciente;
+using ControleDeMedicamentos.ConsoleApp.Models;
+using ControleDeMedicamentos.Dominio.ModuloPaciente;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ControleDeMedicamentos.ConsoleApp.Controllers;
@@ -9,13 +8,11 @@ namespace ControleDeMedicamentos.ConsoleApp.Controllers;
 [Route("/pacientes")]
 public class ControladorPaciente : Controller
 {
-    private readonly ContextoDados contextoDados;
     private readonly IRepositorioPaciente repositorioPaciente;
 
-    public ControladorPaciente()
+    public ControladorPaciente(IRepositorioPaciente repositorioPaciente)
     {
-        contextoDados = new ContextoDados(true);
-        repositorioPaciente = new RepositorioPacienteEmArquivo(contextoDados);
+        this.repositorioPaciente = repositorioPaciente;
     }
 
     [HttpGet("cadastrar")]

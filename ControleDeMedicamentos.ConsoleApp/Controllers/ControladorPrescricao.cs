@@ -1,9 +1,8 @@
-﻿using ControleDeMedicamentos.ConsoleApp.Compartilhado;
-using ControleDeMedicamentos.ConsoleApp.Extensions;
-using ControleDeMedicamentos.ConsoleApp.Model;
-using ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
-using ControleDeMedicamentos.ConsoleApp.ModuloPaciente;
-using ControleDeMedicamentos.ConsoleApp.ModuloPrescricao;
+﻿using ControleDeMedicamentos.ConsoleApp.Extensions;
+using ControleDeMedicamentos.ConsoleApp.Models;
+using ControleDeMedicamentos.Dominio.ModuloMedicamento;
+using ControleDeMedicamentos.Dominio.ModuloPaciente;
+using ControleDeMedicamentos.Dominio.ModuloPrescricao;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
@@ -12,17 +11,19 @@ namespace ControleDeMedicamentos.ConsoleApp.Controllers;
 [Route("prescricoes-medicas")]
 public class ControladorPrescricao : Controller
 {
-    private ContextoDados contexto;
     private IRepositorioPrescricao repositorioPrescricao;
     private IRepositorioPaciente repositorioPaciente;
     private IRepositorioMedicamento repositorioMedicamento;
 
-    public ControladorPrescricao()
+    public ControladorPrescricao(
+        IRepositorioPrescricao repositorioPrescricao,
+        IRepositorioPaciente repositorioPaciente,
+        IRepositorioMedicamento repositorioMedicamento
+    )
     {
-        contexto = new ContextoDados(true);
-        repositorioPrescricao = new RepositorioPrescricaoEmArquivo(contexto);
-        repositorioPaciente = new RepositorioPacienteEmArquivo(contexto);
-        repositorioMedicamento = new RepositorioMedicamentoEmArquivo(contexto);
+        this.repositorioPrescricao = repositorioPrescricao;
+        this.repositorioPaciente = repositorioPaciente;
+        this.repositorioMedicamento = repositorioMedicamento;
     }
 
     [HttpGet("cadastrar")]
